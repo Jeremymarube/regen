@@ -1,0 +1,15 @@
+import Sidebar from "@/components/layout/Sidebar";
+
+export default function DashboardLayout({ children }) {
+  return (
+    <div className="flex min-h-screen bg-[#F9FAFB]">
+      {/* Sidebar */}
+      <Sidebar />
+
+      {/* Main content area */}
+      <main className="flex-1 ml-64 px-8 py-10">
+        <div className="max-w-7xl mx-auto">{children}</div>
+      </main>
+    </div>
+  );
+}
