@@ -16,13 +16,14 @@ export default function Sidebar() {
   };
 
   const navItems = [
-    { path: '/dashboard', label: 'Dashboard' },
-    { path: '/log', label: 'Log Waste' },
-    { path: '/guide', label: 'AI Guide' },
-    { path: '/community', label: 'Community' },
-    { path: '/manage-waste', label: 'Manage' },
-    { path: '/manage-centers', label: 'Centers' },
-  ];
+  { path: '/dashboard', label: 'Dashboard' },
+  { path: '/dashboard/log', label: 'Log Waste' },
+  { path: '/dashboard/guide', label: 'AI Guide' },
+  { path: '/dashboard/community', label: 'Community' },
+  { path: '/dashboard/manage-waste', label: 'Manage' },
+  { path: '/dashboard/manage-centers', label: 'Centers' },
+];
+
 
   return (
     // <aside className="w-52 bg-white border-r border-gray-200 h-screen fixed left-0 top-0 flex flex-col justify-between shadow-sm">
