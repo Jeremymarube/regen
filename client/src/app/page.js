@@ -5,9 +5,9 @@
       <aside className="w-64 bg-gray-800 text-white p-6">
         <h2 className="text-2xl font-bold mb-6">ReGen Dashboard</h2>
         <ul className="space-y-4">
-          <li><a href="#" className="hover:text-gray-300">Dashboard</a></li>
-          <li><a href="#" className="hover:text-gray-300">Log</a></li>
-          <li><a href="#" className="hover:text-gray-300">AI guide</a></li>
+          <li><a href="#" className="hover:text-gray-300">Home</a></li>
+          <li><a href="#" className="hover:text-gray-300">Our services</a></li>
+          <li><a href="#" className="hover:text-gray-300">Community impact</a></li>
         </ul>
       </aside>
 
