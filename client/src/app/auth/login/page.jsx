@@ -9,8 +9,9 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showReset, setShowReset] = useState(false);
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [resetEmail, setResetEmail] = useState('');
+  const [newPassword, setNewPassword] = useState(''); // Fixed: was missing
+  const [confirmPassword, setConfirmPassword] = useState(''); // Fixed: was missing
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
@@ -50,11 +51,11 @@ export default function Login() {
     setLoading(true);
     
     try {
-      // This will call our new backend endpoint
-      await resetPassword(email, newPassword);
+      await resetPassword(resetEmail, newPassword);
       setSuccess('Password reset successfully!');
       setTimeout(() => {
         setShowReset(false);
+        setResetEmail('');
         setNewPassword('');
         setConfirmPassword('');
       }, 2000);
@@ -74,7 +75,7 @@ export default function Login() {
               <Leaf className="w-8 h-8 text-white" />
             </div>
             <h1 className="text-3xl font-bold text-gray-900">Reset Password</h1>
-            <p className="text-gray-600 mt-2">Enter your new password</p>
+            <p className="text-gray-600 mt-2">Enter your email and new password</p>
           </div>
           <div className="bg-white rounded-lg shadow-sm p-8">
             {error && (
@@ -88,6 +89,19 @@ export default function Login() {
               </div>
             )}
             <form onSubmit={handleResetPassword} className="space-y-6">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  value={resetEmail}
+                  onChange={(e) => setResetEmail(e.target.value)}
+                  required
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
+                  placeholder="you@example.com"
+                />
+              </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   New Password
@@ -119,6 +133,7 @@ export default function Login() {
                   type="button"
                   onClick={() => {
                     setShowReset(false);
+                    setResetEmail('');
                     setNewPassword('');
                     setConfirmPassword('');
                   }}

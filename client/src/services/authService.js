@@ -25,8 +25,14 @@ class AuthService {
     return data;
   }
 
-  async resetPassword(email) {
-    return await api.post('/api/auth/reset-password', { email });
+  async resetPassword(email, newPassword) {
+    console.log('DEBUG - resetPassword called with:', { email, newPassword });
+    const data = await api.post('/api/auth/reset-password', { 
+      email, 
+      new_password: newPassword 
+    });
+    console.log('DEBUG - resetPassword result:', data);
+    return data;
   }
 
   async getCurrentUser() {

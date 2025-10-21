@@ -63,6 +63,31 @@ def login():
     except Exception as e:
         return jsonify({'message': 'Login failed'}), 500
 
+@auth_bp.route('/reset-password', methods=['POST'])
+def reset_password():
+    try:
+        data = request.get_json()
+        
+        if not data or not data.get('email') or not data.get('new_password'):
+            return jsonify({'message': 'Email and new password required'}), 400
+        
+        user = User.query.filter_by(email=data['email']).first()
+        
+        if not user:
+            return jsonify({'message': 'User not found'}), 404
+        
+        # Update the password
+        user.set_password(data['new_password'])
+        db.session.commit()
+        
+        return jsonify({
+            'message': 'Password reset successfully'
+        }), 200
+        
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'message': 'Password reset failed'}), 500
+
 @auth_bp.route('/me', methods=['GET'])
 def get_current_user():
     try:
