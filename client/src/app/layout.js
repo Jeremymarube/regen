@@ -17,7 +17,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${rasa.variable} font-sans antialiased bg-gray-50`}
+       className={`${rasa.variable} font-[var(--font-rasa)] antialiased bg-gray-50`}
+
       >
         <AuthProvider>
           {children}
