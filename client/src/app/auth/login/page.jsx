@@ -9,7 +9,8 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showReset, setShowReset] = useState(false);
-  const [resetEmail, setResetEmail] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
@@ -35,14 +36,30 @@ export default function Login() {
     e.preventDefault();
     setError('');
     setSuccess('');
+    
+    if (newPassword !== confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+    
+    if (newPassword.length < 6) {
+      setError('Password must be at least 6 characters');
+      return;
+    }
+    
     setLoading(true);
     
     try {
-      await resetPassword(resetEmail);
-      setSuccess('Password reset email sent! Check your inbox.');
-      setTimeout(() => setShowReset(false), 3000);
+      // This will call our new backend endpoint
+      await resetPassword(email, newPassword);
+      setSuccess('Password reset successfully!');
+      setTimeout(() => {
+        setShowReset(false);
+        setNewPassword('');
+        setConfirmPassword('');
+      }, 2000);
     } catch (err) {
-      setError(err.message || 'Failed to send reset email');
+      setError(err.message || 'Failed to reset password');
     } finally {
       setLoading(false);
     }
@@ -57,7 +74,7 @@ export default function Login() {
               <Leaf className="w-8 h-8 text-white" />
             </div>
             <h1 className="text-3xl font-bold text-gray-900">Reset Password</h1>
-            <p className="text-gray-600 mt-2">Enter your email to receive reset instructions</p>
+            <p className="text-gray-600 mt-2">Enter your new password</p>
           </div>
           <div className="bg-white rounded-lg shadow-sm p-8">
             {error && (
@@ -73,33 +90,51 @@ export default function Login() {
             <form onSubmit={handleResetPassword} className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Email Address
+                  New Password
                 </label>
                 <input
-                  type="email"
-                  value={resetEmail}
-                  onChange={(e) => setResetEmail(e.target.value)}
+                  type="password"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
                   required
                   className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
-                  placeholder="you@example.com"
+                  placeholder="Enter new password"
                 />
               </div>
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full bg-green-600 text-white py-2.5 rounded-lg font-medium hover:bg-green-700 transition disabled:opacity-50"
-              >
-                {loading ? 'Sending...' : 'Send Reset Link'}
-              </button>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Confirm New Password
+                </label>
+                <input
+                  type="password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
+                  placeholder="Confirm new password"
+                />
+              </div>
+              <div className="flex gap-4">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowReset(false);
+                    setNewPassword('');
+                    setConfirmPassword('');
+                  }}
+                  className="flex-1 bg-gray-600 text-white py-2.5 rounded-lg font-medium hover:bg-gray-700 transition"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="flex-1 bg-green-600 text-white py-2.5 rounded-lg font-medium hover:bg-green-700 transition disabled:opacity-50"
+                >
+                  {loading ? 'Resetting...' : 'Reset Password'}
+                </button>
+              </div>
             </form>
-            <div className="mt-6 text-center">
-              <button
-                onClick={() => setShowReset(false)}
-                className="text-green-600 hover:text-green-700 font-medium"
-              >
-                Back to Sign In
-              </button>
-            </div>
           </div>
         </div>
       </div>
