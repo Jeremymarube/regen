@@ -23,7 +23,7 @@ export default function Home() {
               </p>
               <div className="flex gap-10">
                 <Link
-                  href="/auth/register"
+                  href="/register"
                 className="flex items-center justify-center rounded-lg transition"
              style={{
                width: '134px',            // button width
@@ -45,7 +45,7 @@ export default function Home() {
                   <ArrowRight className="w-5 h-5" />
                 </Link>
                <Link
-  href="/auth/login"
+  href="/login"
   className="flex items-center justify-center rounded-lg border-2 border-[#008236] text-[#008236] font-medium hover:bg-green-50 transition"
   style={{
     width: '81px',             // button width
