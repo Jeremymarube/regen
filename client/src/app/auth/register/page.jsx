@@ -48,8 +48,8 @@ export default function Register() {
           <div className="inline-flex items-center justify-center w-16 h-16 bg-green-600 rounded-full mb-4">
             <Leaf className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900">Join ReGen</h1>
-          <p className="text-gray-600 mt-2">Start your journey to a sustainable future</p>
+          <h1 className="text-3xl font-bold text-black ">Join ReGen</h1>
+          <p className="text-black mt-2 font-serif">Start your journey to a sustainable future</p>
         </div>
 
         <div className="bg-white rounded-lg shadow-sm p-8">
@@ -61,7 +61,7 @@ export default function Register() {
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-bold font-serif text-black mb-2">
                 Full Name
               </label>
               <input
@@ -75,7 +75,7 @@ export default function Register() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-bold font-serif text-black mb-2">
                 Email Address
               </label>
               <input
@@ -89,7 +89,7 @@ export default function Register() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-bold font-serif text-black mb-2">
                 Password
               </label>
               <input
@@ -103,7 +103,7 @@ export default function Register() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-bold font-serif text-black mb-2">
                 Confirm Password
               </label>
               <input
@@ -125,7 +125,7 @@ export default function Register() {
             </button>
           </form>
 
-          <div className="mt-6 text-center text-sm text-gray-600">
+          <div className="mt-6 text-center text-sm text-black font-serif">
             Already have an account?{' '}
             <Link href="/auth/login" className="text-green-600 hover:text-green-700 font-medium">
               Sign in

@@ -14,12 +14,11 @@ db = SQLAlchemy()
 migrate = Migrate()
 bcrypt = Bcrypt()
 
-# ✅ Import existing blueprints
+# Import blueprints
 from routes.auth_routes import auth_bp
-
-
-# ✅ Import your new dashboard and waste route
 from routes.dashboard_routes import dashboard_bp
+from routes.community_routes import community_bp
+from routes.waste_routes import waste_bp
 
 def create_app():
     app = Flask(__name__)
@@ -46,7 +45,9 @@ def create_app():
     
     # Register blueprints
     app.register_blueprint(auth_bp)
-    app.register_blueprint(dashboard_bp, url_prefix='/api/dashboard') # ✅ New
+    app.register_blueprint(dashboard_bp)
+    app.register_blueprint(community_bp)
+    app.register_blueprint(waste_bp)
     
     @app.route('/api/health')
     def health_check():

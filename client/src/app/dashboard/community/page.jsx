@@ -15,15 +15,21 @@ export default function Community() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => {
-      const rankedData = mockLeaderboard.map((profile, index) => ({
-        ...profile,
-        rank: index + 1
-      }));
-      setLeaderboard(rankedData);
+  const fetchLeaderboard = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/community/leaderboard');
+      const data = await response.json();
+      setLeaderboard(data.leaderboard || []);
+    } catch (error) {
+      console.error('Failed to fetch leaderboard:', error);
+      setLeaderboard([]);
+    } finally {
       setLoading(false);
-    }, 1000);
-  }, []);
+    }
+  };
+
+  fetchLeaderboard();
+}, []);
 
   if (loading) {
     return (
@@ -101,9 +107,6 @@ function StatCard({ icon, label, value, bgColor }) {
 
 function LeaderboardRow({ entry }) {
   const getRankDisplay = (rank) => {
-    if (rank === 1) return <Trophy className="w-6 h-6 text-yellow-500" />;
-    if (rank === 2) return <Trophy className="w-6 h-6 text-gray-400" />;
-    if (rank === 3) return <Trophy className="w-6 h-6 text-orange-600" />;
     return <span className="text-gray-600 font-medium">#{rank}</span>;
   };
 

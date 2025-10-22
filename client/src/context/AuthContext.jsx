@@ -66,9 +66,10 @@ export function AuthProvider({ children }) {
     }
   };
 
-  const resetPassword = async (email) => {
+  const resetPassword = async (email, newPassword) => {
     try {
-      return await authService.resetPassword(email);
+      const data = await authService.resetPassword(email, newPassword);
+      return data;
     } catch (error) {
       console.error('Password reset error:', error);
       throw error;

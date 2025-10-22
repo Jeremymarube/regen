@@ -1,8 +1,9 @@
-from database import db
+from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from datetime import datetime
 import uuid
 
+db = SQLAlchemy()
 bcrypt = Bcrypt()
 
 # ========================
@@ -47,7 +48,10 @@ class User(db.Model):
         """
         total_waste_recycled = sum(log.weight for log in self.waste_logs)
         total_co2_saved = sum(log.co2_saved or 0 for log in self.waste_logs)
-        total_points = sum(reward.points for reward in self.rewards)
+        # Calculate points from waste logs AND existing rewards
+        calculated_points = int(total_co2_saved * 10 + total_waste_recycled * 5)
+        reward_points = sum(reward.points for reward in self.rewards)
+        total_points = calculated_points + reward_points
         total_entries = len(self.waste_logs)
 
         return {
@@ -63,6 +67,21 @@ class User(db.Model):
         stats = self.get_dashboard_stats()
         data.update(stats)
         return data
+
+    # Leaderboard statistics
+    def get_leaderboard_stats(self):
+        """
+        Returns leaderboard statistics for community ranking
+        """
+        stats = self.get_dashboard_stats()
+        return {
+            'id': self.id,
+            'name': self.name,
+            'location': self.location,
+            'points': stats['points'],
+            'total_co2_saved': stats['total_co2_saved'],
+            'total_waste_recycled': stats['total_waste_recycled']
+        }
 
 # ========================
 # WASTE LOG MODEL
@@ -127,16 +146,3 @@ user_community = db.Table(
     db.Column('community_id', db.String(36), db.ForeignKey('communities.id'), primary_key=True),
     db.Column('joined_at', db.DateTime, default=datetime.utcnow)
 )
-
-
-class Message(db.Model):
-    __tablename__ = 'messages'
-    
-    id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))  # Consistent ID type
-    user_id = db.Column(db.String(36), db.ForeignKey('users.id'), nullable=False)
-    role = db.Column(db.String(20), nullable=False)  # 'user' or 'assistant'
-    content = db.Column(db.Text, nullable=False)
-    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
-    
-    # Relationship
-    user = db.relationship('User', backref=db.backref('messages', lazy=True))
