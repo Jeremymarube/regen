@@ -3,7 +3,9 @@
 import {useState} from 'react';
 //import ProtectedRoute from '@/components/auth/ProtectedRoute';
 import Sidebar from '@/components/layout/Sidebar';
-import { Send, Bot, User } from 'lucide-react';
+import { Send, Bot, User, } from 'lucide-react';
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+
 
 const AI_RESPONCES = {
    plastic: 'For plastic waste:\n\n1. Clean and dry the plastic items\n2. Check the recycling number (1-7)\n3. Separate by type:\n   • PET/PETE (#1) - bottles, containers\n   • HDPE (#2) - milk jugs, detergent bottles\n   • PVC (#3) - pipes, credit cards\n   • LDPE (#4) - shopping bags\n   • PP (#5) - bottle caps, straws\n   • PS (#6) - styrofoam cups\n   • Other (#7) - mixed plastics\n\n4. Take to your local recycling center\n\nTip: Avoid #3, #6, and #7 plastics as they\'re harder to recycle.',
@@ -156,6 +158,7 @@ const AI_RESPONCES = {
             </div>
           </div>
           
+
         </div>
       </div>
     </div>
