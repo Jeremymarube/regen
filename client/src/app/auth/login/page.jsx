@@ -161,7 +161,7 @@ export default function Login() {
       <div className="max-w-md w-full">
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-green-600 rounded-full mb-4">
-            <Leaf className="w-8 h-8 text-white" />
+            <Leaf className="w-8 h-8 text-white " />
           </div>
           <h1 className="text-3xl font-bold text-gray-900 font-serif">Welcome Back</h1>
           <p className="text-black mt-2 font-serif">Sign in to continue your sustainability journey</p>
