@@ -168,6 +168,16 @@ const AI_RESPONCES = {
                 </p>
               </CardContent>
             </Card>
+             <Card className="bg-gradient-card border-border hover:shadow-md transition-smooth">
+              <CardHeader>
+                <CardTitle className="text-base">Did You Know?</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  Composting can reduce waste by up to 30%.
+                </p>
+              </CardContent>
+            </Card>
 
         </div>
       </div>
