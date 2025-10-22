@@ -162,4 +162,64 @@ export default function ManageWaste() {
   );
 }
 
-// ViewLogModal and DetailRow components remain the same...
+function ViewLogModal({ log, onClose }) {
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+      <div className="bg-white rounded-lg max-w-2xl w-full p-6">
+        <div className="flex justify-between items-start mb-6">
+          <h2 className="text-2xl font-bold text-gray-900">Waste Log Details</h2>
+          <button
+            onClick={onClose}
+            className="p-2 hover:bg-gray-100 rounded transition"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
+        <div className="space-y-4">
+          <DetailRow label="Waste Type" value={log.waste_type} />
+          <DetailRow label="Weight" value={`${log.weight} kg`} />
+          <DetailRow label="CO₂ Saved" value={`${log.co2_saved?.toFixed(2) || '0'} kg`} />
+          <DetailRow label="Collection Location" value={log.collection_location || 'Not specified'} />
+          <DetailRow label="Collection Status" value={log.collection_status || 'pending'} />
+          <DetailRow
+            label="Collection Date"
+            value={log.collection_date ? new Date(log.collection_date).toLocaleDateString() : 'Not set'}
+          />
+          <DetailRow label="Date Logged" value={new Date(log.date).toLocaleString()} />
+          <DetailRow label="Disposal Method" value={log.disposal_method || 'Not specified'} />
+          {log.image_url && (
+            <div>
+              <p className="text-sm font-medium text-gray-700 mb-2">Image</p>
+              <img src={log.image_url} alt="Waste" className="rounded-lg max-h-64 object-cover" />
+            </div>
+          )}
+        </div>
+
+        <div className="flex space-x-4 mt-6">
+          <button
+            onClick={onClose}
+            className="flex-1 bg-gray-600 text-white py-2.5 rounded-lg hover:bg-gray-700 transition"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={onClose}
+            className="flex-1 bg-green-600 text-white py-2.5 rounded-lg hover:bg-green-700 transition"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DetailRow({ label, value }) {
+  return (
+    <div className="border-b border-gray-100 pb-3">
+      <p className="text-sm font-medium text-gray-700 mb-1">{label}</p>
+      <p className="text-gray-900 capitalize">{value || 'N/A'}</p>
+    </div>
+  );
+}
