@@ -1,7 +1,7 @@
 'use client';
 
 import {useState} from 'react';
-//import ProtectedRoute from '@/components/auth/ProtectedRoute';
+import ProtectedRoute from '@/components/auth/ProtectedRoute';
 import Sidebar from '@/components/layout/Sidebar';
 import { Send, Bot, User, } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -202,8 +202,8 @@ const AI_RESPONCES = {
 
 export default function Guide() {
   return (
-    //<ProtectedRoute>
+    <ProtectedRoute>
       <GuideContent />
-    //</ProtectedRoute>
+    </ProtectedRoute>
   );
 }
