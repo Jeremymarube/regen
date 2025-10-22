@@ -1,19 +1,16 @@
-# Dependencies
+# ========================
+# Node / Next.js
+# ========================
 node_modules/
 .npm
 .yarn-integrity
-
-# Next.js
 .next/
 out/
 dist/
-
-# Production builds
 build/
 
-# Environment variables
-.env*
-!.env.example
+# Optional npm cache
+.npm
 
 # Logs
 npm-debug.log*
@@ -21,33 +18,14 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
-
-# Coverage directory used by tools like istanbul
-coverage/
-*.lcov
-
-# nyc test coverage
-.nyc_output
-
-# Dependency directories
-jspm_packages/
-
-# Optional npm cache directory
-.npm
-
-# Optional eslint cache
-.eslintcache
-
-# Microbundle cache
+# Parcel / Microbundle / FuseBox caches
+.cache/
+.parcel-cache/
 .rpt2_cache/
 .rts2_cache_cjs/
 .rts2_cache_es/
 .rts2_cache_umd/
+.fusebox/
 
 # Optional REPL history
 .node_repl_history
@@ -55,47 +33,46 @@ jspm_packages/
 # Output of 'npm pack'
 *.tgz
 
-# Yarn Integrity file
-.yarn-integrity
+# ========================
+# Python / Flask
+# ========================
+# Virtual environments
+venv/
+.venv/
+server/venv/
+server/.venv/
 
-# dotenv environment variables file
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Pipenv
+Pipfile.lock
+
+# Flask / SQLite database
+*.db
+*.sqlite
+*.sqlite3
+
+# Environment variables
 .env
-.env.test
-.env.production
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.*
+!.env.example
 
-# parcel-bundler cache (https://parceljs.org/)
-.cache
-.parcel-cache
+# ========================
+# IDE / Editor
+# ========================
+.vscode/
+.idea/
+*.swo
+*.swp
+*.swn
 
-# next.js build output
-.next
-
-# nuxt.js build output
-.nuxt
-
-# vuepress build output
-.vuepress/dist
-
-# Serverless directories
-.serverless/
-
-# FuseBox cache
-.fusebox/
-
-# DynamoDB Local files
-.dynamodb/
-
-# TernJS port file
-.tern-port
-
-# Stores VSCode versions used for testing VSCode extensions
-.vscode-test
-
-# OS generated files
+# ========================
+# OS
+# ========================
 .DS_Store
 .DS_Store?
 ._*
@@ -104,27 +81,13 @@ jspm_packages/
 ehthumbs.db
 Thumbs.db
 
-# IDE files
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# Temporary folders
+# ========================
+# Uploads / temporary / secrets
+# ========================
+uploads/
 tmp/
 temp/
-# Local development files
-*.local
-
-# API keys and secrets
 *.key
 *.pem
 
-# Database files (if any)
-*.db
-*.sqlite
-*.sqlite3
-
-# Uploads directory (if you have file uploads)
-uploads/
-public/uploads/
+script by mako
