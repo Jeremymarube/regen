@@ -164,7 +164,7 @@ export default function Login() {
             <Leaf className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-3xl font-bold text-gray-900 font-serif">Welcome Back</h1>
-          <p className="text-gray-600 mt-2 font-serif">Sign in to continue your sustainability journey</p>
+          <p className="text-black mt-2 font-serif">Sign in to continue your sustainability journey</p>
         </div>
         <div className="bg-white rounded-lg shadow-sm p-8">
           {error && (
@@ -174,7 +174,7 @@ export default function Login() {
           )}
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2 font-serif">
+              <label className="block text-sm font-medium text-black mb-2 font-serif">
                 Email Address
               </label>
               <input
@@ -187,7 +187,7 @@ export default function Login() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2 font-serif">
+              <label className="block text-sm font-medium text-black mb-2 font-serif">
                 Password
               </label>
               <input
@@ -217,7 +217,7 @@ export default function Login() {
             </button>
           </form>
 
-          <div className="mt-6 text-center text-sm text-gray-600 font-serif">
+          <div className="mt-6 text-center text-sm text-black font-serif">
             Don&apos;t have an account?{' '}
             <Link href="/auth/register" className="text-green-600 hover:text-green-700 font-medium">
               Sign up
