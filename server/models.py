@@ -47,7 +47,10 @@ class User(db.Model):
         """
         total_waste_recycled = sum(log.weight for log in self.waste_logs)
         total_co2_saved = sum(log.co2_saved or 0 for log in self.waste_logs)
-        total_points = sum(reward.points for reward in self.rewards)
+        # Calculate points from waste logs AND existing rewards
+        calculated_points = int(total_co2_saved * 10 + total_waste_recycled * 5)
+        reward_points = sum(reward.points for reward in self.rewards)
+        total_points = calculated_points + reward_points
         total_entries = len(self.waste_logs)
 
         return {
