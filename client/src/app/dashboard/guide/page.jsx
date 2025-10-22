@@ -1,8 +1,9 @@
 'use client';
 
 import {useState} from 'react';
-import ProtectedRoute from '@/components/auth/ProtectedRoute';
+//import ProtectedRoute from '@/components/auth/ProtectedRoute';
 import Sidebar from '@/components/layout/Sidebar';
+import { Send, Bot, User } from 'lucide-react';
 
 const AI_RESPONCES = {
    plastic: 'For plastic waste:\n\n1. Clean and dry the plastic items\n2. Check the recycling number (1-7)\n3. Separate by type:\n   • PET/PETE (#1) - bottles, containers\n   • HDPE (#2) - milk jugs, detergent bottles\n   • PVC (#3) - pipes, credit cards\n   • LDPE (#4) - shopping bags\n   • PP (#5) - bottle caps, straws\n   • PS (#6) - styrofoam cups\n   • Other (#7) - mixed plastics\n\n4. Take to your local recycling center\n\nTip: Avoid #3, #6, and #7 plastics as they\'re harder to recycle.',
@@ -79,7 +80,7 @@ const AI_RESPONCES = {
    return (
     <div className="flex">
       <Sidebar />
-      <div className="ml-64 flex-1 min-h-screen bg-gray-50 py-8 px-4">
+      <div className="ml-8 flex-1 min-h-screen bg-gray-50 py-8 px-4">
         <div className="max-w-4xl mx-auto">
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-gray-900">AI Green Guide</h1>
@@ -87,8 +88,84 @@ const AI_RESPONCES = {
               Ask me anything about waste management and sustainability
             </p>
           </div>
-     </div>
-     </div>
-     </div>  
-   );      
-  }
+           <div className="bg-white rounded-lg shadow-sm flex flex-col h-[600px]">
+            <div className="flex-1 overflow-y-auto p-6 space-y-4">
+              {messages.map((message) => (
+                <div
+                  key={message.id}
+                  className={`flex items-start space-x-3 ${
+                    message.role === 'user' ? 'flex-row-reverse space-x-reverse' : ''
+                  }`}
+                >
+                  <div
+                    className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
+                      message.role === 'user' ? 'bg-green-600' : 'bg-gray-200'
+                    }`}
+                  >
+                    {message.role === 'user' ? (
+                      <User className="w-5 h-5 text-white" />
+                    ) : (
+                      <Bot className="w-5 h-5 text-gray-600" />
+                    )}
+                  </div>
+                  <div
+                    className={`flex-1 px-4 py-3 rounded-lg whitespace-pre-line ${
+                      message.role === 'user'
+                        ? 'bg-green-600 text-white'
+                        : 'bg-gray-100 text-gray-900'
+                    }`}
+                  >
+                    {message.content}
+                  </div>
+                </div>
+              ))}
+               {loading && (
+                <div className="flex items-start space-x-3">
+                  <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
+                    <Bot className="w-5 h-5 text-gray-600" />
+                  </div>
+                  <div className="bg-gray-100 px-4 py-3 rounded-lg">
+                    <div className="flex space-x-2">
+                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="border-t border-gray-200 p-4">
+              <div className="flex space-x-2">
+                <input
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+                  placeholder="Ask about waste disposal, recycling, biogas..."
+                  className="flex-1 px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
+                />
+                <button
+                  onClick={handleSend}
+                  disabled={loading || !input.trim()}
+                  className="bg-green-600 text-white px-6 py-2.5 rounded-lg hover:bg-green-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <Send className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function Guide() {
+  return (
+    //<ProtectedRoute>
+      <GuideContent />
+    //</ProtectedRoute>
+  );
+}
