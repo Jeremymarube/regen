@@ -90,4 +90,4 @@ temp/
 *.key
 *.pem
 
-script by mako
+script py mako
