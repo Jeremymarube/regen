@@ -182,6 +182,13 @@ const AI_RESPONCES = {
               <CardHeader>
                 <CardTitle className="text-base">Pro Tip</CardTitle>
               </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  Use reusable bags and containers to minimize single-use plastics.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
 
         </div>
       </div>
