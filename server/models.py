@@ -5,6 +5,9 @@ import uuid
 
 bcrypt = Bcrypt()
 
+# ========================
+# USER MODEL
+# ========================
 class User(db.Model):
     __tablename__ = 'users'
     
@@ -20,12 +23,14 @@ class User(db.Model):
     waste_logs = db.relationship('WasteLog', backref='user', lazy=True)
     rewards = db.relationship('Reward', backref='user', lazy=True)
     
+    # Authentication methods
     def set_password(self, password):
         self.password_hash = bcrypt.generate_password_hash(password).decode('utf-8')
     
     def check_password(self, password):
         return bcrypt.check_password_hash(self.password_hash, password)
     
+    # Convert user to dictionary (basic profile)
     def to_dict(self):
         return {
             'id': self.id,
@@ -34,7 +39,34 @@ class User(db.Model):
             'location': self.location,
             'created_at': self.created_at.isoformat() if self.created_at else None
         }
+    
+    # Dashboard statistics calculation
+    def get_dashboard_stats(self):
+        """
+        Returns dashboard statistics: total waste recycled, CO2 saved, points, and number of entries.
+        """
+        total_waste_recycled = sum(log.weight for log in self.waste_logs)
+        total_co2_saved = sum(log.co2_saved or 0 for log in self.waste_logs)
+        total_points = sum(reward.points for reward in self.rewards)
+        total_entries = len(self.waste_logs)
 
+        return {
+            'total_waste_recycled': round(total_waste_recycled, 2),
+            'total_co2_saved': round(total_co2_saved, 2),
+            'points': total_points,
+            'total_entries': total_entries
+        }
+
+    # Extended dictionary including stats
+    def to_dashboard_dict(self):
+        data = self.to_dict()
+        stats = self.get_dashboard_stats()
+        data.update(stats)
+        return data
+
+# ========================
+# WASTE LOG MODEL
+# ========================
 class WasteLog(db.Model):
     __tablename__ = 'waste_logs'
     
@@ -50,6 +82,9 @@ class WasteLog(db.Model):
     collection_status = db.Column(db.String(20), default='pending')  # pending, scheduled, collected
     collection_date = db.Column(db.DateTime)
 
+# ========================
+# RECYCLING CENTER MODEL
+# ========================
 class RecyclingCenter(db.Model):
     __tablename__ = 'recycling_centers'
     
@@ -60,6 +95,9 @@ class RecyclingCenter(db.Model):
     latitude = db.Column(db.Float)
     longitude = db.Column(db.Float)
 
+# ========================
+# REWARD MODEL
+# ========================
 class Reward(db.Model):
     __tablename__ = 'rewards'
     
@@ -69,6 +107,9 @@ class Reward(db.Model):
     points = db.Column(db.Integer, default=0)
     awarded_at = db.Column(db.DateTime, default=datetime.utcnow)
 
+# ========================
+# COMMUNITY MODEL
+# ========================
 class Community(db.Model):
     __tablename__ = 'communities'
     
@@ -77,12 +118,16 @@ class Community(db.Model):
     impact_score = db.Column(db.Float, default=0.0)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-# Association table for many-to-many users-communities
-user_community = db.Table('user_community',
+# ========================
+# USER-COMMUNITY ASSOCIATION TABLE
+# ========================
+user_community = db.Table(
+    'user_community',
     db.Column('user_id', db.String(36), db.ForeignKey('users.id'), primary_key=True),
     db.Column('community_id', db.String(36), db.ForeignKey('communities.id'), primary_key=True),
     db.Column('joined_at', db.DateTime, default=datetime.utcnow)
 )
+
 
 class Message(db.Model):
     __tablename__ = 'messages'
