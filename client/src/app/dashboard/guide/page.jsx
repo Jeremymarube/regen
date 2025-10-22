@@ -1,8 +1,94 @@
-export default function LogPage() {
-  return (
-    <div>
-      <h1 className="text-2xl font-bold text-gray-800">AI guide Page</h1>
-      <p className="mt-2 text-gray-600">This is where you can chat with AI.</p>
-    </div>
-  );
-}
+'use client';
+
+import {useState} from 'react';
+import ProtectedRoute from '@/components/auth/ProtectedRoute';
+import Sidebar from '@/components/layout/Sidebar';
+
+const AI_RESPONCES = {
+   plastic: 'For plastic waste:\n\n1. Clean and dry the plastic items\n2. Check the recycling number (1-7)\n3. Separate by type:\n   • PET/PETE (#1) - bottles, containers\n   • HDPE (#2) - milk jugs, detergent bottles\n   • PVC (#3) - pipes, credit cards\n   • LDPE (#4) - shopping bags\n   • PP (#5) - bottle caps, straws\n   • PS (#6) - styrofoam cups\n   • Other (#7) - mixed plastics\n\n4. Take to your local recycling center\n\nTip: Avoid #3, #6, and #7 plastics as they\'re harder to recycle.',
+
+   biogas: 'Converting agricultural waste to biogas:\n\n1. Collect organic waste (crop residue, animal manure, food scraps)\n2. Use a biogas digester (can be homemade or purchased)\n3. Mix waste with water in 1:1 ratio\n4. Maintain temperature at 35-37°C\n5. Wait 20-30 days for gas production\n\nBenefits:\n• Free cooking fuel\n• Reduces methane emissions\n• Creates organic fertilizer as byproduct\n• Saves money on energy costs\n\nA small household digester can produce 2-4 hours of cooking gas daily!',
+
+   ewaste: 'E-waste disposal guidelines:\n\n1. Never throw electronics in regular trash\n2. Remove personal data first\n3. Options for disposal:\n   • Manufacturer take-back programs\n   • Certified e-waste recycling centers\n   • Retail drop-off locations\n   • Community e-waste collection events\n\n4. What can be recycled:\n   • Computers and laptops\n   • Phones and tablets\n   • TVs and monitors\n   • Batteries\n   • Small appliances\n\nE-waste contains valuable materials (gold, silver, copper) that can be recovered!',
+    reduce: 'Top 10 ways to reduce your carbon footprint:\n\n1. Reduce single-use plastics\n2. Compost organic waste\n3. Use reusable bags and containers\n4. Choose products with minimal packaging\n5. Repair instead of replace\n6. Buy second-hand when possible\n7. Use public transportation or carpool\n8. Switch to LED bulbs\n9. Reduce food waste\n10. Support local and sustainable products\n\nSmall changes add up to big impact!',
+ 
+   compost: 'Composting organic waste:\n\n✓ What to compost:\n• Fruit and vegetable scraps\n• Coffee grounds and tea bags\n• Eggshells\n• Yard waste (leaves, grass)\n• Shredded paper and cardboard\n\n✗ What NOT to compost:\n• Meat and dairy\n• Oils and fats\n• Pet waste\n• Diseased plants\n\nBasic steps:\n1. Choose a composting method (bin, pile, or tumbler)\n2. Layer green (nitrogen) and brown (carbon) materials\n3. Keep moist but not wet\n4. Turn regularly for air\n5. Ready in 2-6 months\n\nUse finished compost as natural fertilizer!', 
+   default: 'I can help you with specific questions about:\n\n• Waste classification and disposal\n• Recycling guidelines\n• Biogas production from agricultural waste\n• Finding recycling centers\n• Reducing environmental impact\n• Sustainable living practices\n\nPlease ask me something specific, like "How do I recycle plastic?" or "How can I make biogas?"'
+  
+  };
+
+  function GuideContent() {
+    const [messages, setMessages] = useState([
+      {
+        id: 1,
+        role: 'assistant',
+         content: 'Hello! I\'m your AI sustainability assistant. I can help you with:\n\n• Waste disposal and recycling guidance\n• Finding nearby recycling centers\n• Converting agricultural waste to biogas\n• Reducing your carbon footprint\n• Sustainable living tips\n\nWhat would you like to know?'
+      }
+    ]);
+     const [input, setInput] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const getAIResponse = (userMessage) => {
+    const lowerMessage = userMessage.toLowerCase();
+
+    if (lowerMessage.includes('plastic') || lowerMessage.includes('recycle plastic')) {
+      return AI_RESPONSES.plastic;
+  }
+      if (lowerMessage.includes('biogas') || lowerMessage.includes('agricultural')) {
+      return AI_RESPONSES.biogas;
+    }
+
+    if (lowerMessage.includes('e-waste') || lowerMessage.includes('electronic')) {
+      return AI_RESPONSES.ewaste;
+    }
+      if (lowerMessage.includes('reduce') || lowerMessage.includes('carbon footprint')) {
+      return AI_RESPONSES.reduce;
+    }
+
+    if (lowerMessage.includes('compost') || lowerMessage.includes('organic')) {
+      return AI_RESPONSES.compost;
+    }
+
+    return AI_RESPONSES.default;
+  };
+      const handleSend = async () => {
+    if (!input.trim() || loading) return;
+
+    const userMessage = {
+      id: Date.now().toString(),
+      role: 'user',
+      content: input.trim()
+    };
+
+    setMessages((prev) => [...prev, userMessage]);
+    setInput('');
+    setLoading(true);
+
+    setTimeout(() => {
+      const response = getAIResponse(userMessage.content);
+
+      const assistantMessage = {
+        id: (Date.now() + 1).toString(),
+        role: 'assistant',
+        content: response
+      };
+       setMessages((prev) => [...prev, assistantMessage]);
+      setLoading(false);
+    }, 500);
+  };
+   return (
+    <div className="flex">
+      <Sidebar />
+      <div className="ml-64 flex-1 min-h-screen bg-gray-50 py-8 px-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="mb-8">
+            <h1 className="text-3xl font-bold text-gray-900">AI Green Guide</h1>
+            <p className="text-gray-600 mt-2">
+              Ask me anything about waste management and sustainability
+            </p>
+          </div>
+     </div>
+     </div>
+     </div>  
+   );      
+  }
