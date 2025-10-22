@@ -4,7 +4,7 @@ import { AuthProvider } from "@/context/AuthContext";
 
 const rasa = Rasa({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"], // Adjust as per your Figma use
+  weight: ["400", "500", "600", "700"],
   variable: "--font-rasa",
 });
 

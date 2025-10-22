@@ -31,7 +31,7 @@ export default function Sidebar() {
     {/* Logo */}
     <div className="p-4 flex items-center justify-center border-b border-gray-100">
   <img
-    src="/images/regen-logo.jpeg"
+    src="/images/regen-logo.png"
     alt="ReGen Logo"
     className="w-28 h-auto object-contain" 
   />
