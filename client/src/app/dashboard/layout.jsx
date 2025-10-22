@@ -7,7 +7,7 @@ export default function DashboardLayout({ children }) {
       <Sidebar />
 
       {/* Main content area */}
-      <main className="flex-1 ml-64 px-8 py-10">
+      <main className="flex-1 ml-33 px-8 py-10">
         <div className="max-w-7xl mx-auto">{children}</div>
       </main>
     </div>
