@@ -82,23 +82,26 @@ const AI_RESPONCES = {
    return (
     <div className="flex">
       <Sidebar />
-      <div className="ml-8 flex-1 min-h-screen bg-gray-50 py-8 px-4">
-        <div className="max-w-4xl mx-auto">
+       <div className="ml-14 flex-1 min-h-screen bg-gray-50  px-6">
+        <div className="max-w-7xl mx-auto"> 
+        
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900">AI Green Guide</h1>
-            <p className="text-gray-600 mt-2">
+    
+            <h1 className="text-[55px] font-bold text-gray-900">AI Green Guide</h1>
+            <p className="text-gray-600 mt-2 font-regular text-[24px]">
               Ask me anything about waste management and sustainability
             </p>
           </div>
-           <div className="bg-white rounded-lg shadow-sm flex flex-col h-[600px]">
-            <div className="flex-1 overflow-y-auto p-6 space-y-4">
-              {messages.map((message) => (
-                <div
-                  key={message.id}
-                  className={`flex items-start space-x-3 ${
-                    message.role === 'user' ? 'flex-row-reverse space-x-reverse' : ''
-                  }`}
-                >
+           
+                <div className="bg-white rounded-lg shadow-sm flex flex-col h-[600px]">
+  <div className="flex-1 overflow-y-auto p-6 space-y-4">
+    {messages.map((message) => (
+      <div
+        key={message.id}
+        className={`flex items-start space-x-3 ${
+          message.role === 'user' ? 'flex-row-reverse space-x-reverse' : ''
+        }`}
+      >
                   <div
                     className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
                       message.role === 'user' ? 'bg-green-600' : 'bg-gray-200'
@@ -111,12 +114,12 @@ const AI_RESPONCES = {
                     )}
                   </div>
                   <div
-                    className={`flex-1 px-4 py-3 rounded-lg whitespace-pre-line ${
-                      message.role === 'user'
-                        ? 'bg-green-600 text-white'
-                        : 'bg-gray-100 text-gray-900'
-                    }`}
-                  >
+  className={`flex-1 px-4 py-3 rounded-lg whitespace-pre-line text-[24px] font-regular leading-relaxed ${
+    message.role === 'user'
+      ? 'bg-green-600 text-white'
+      : 'bg-gray-100 text-gray-900'
+  }`}
+>
                     {message.content}
                   </div>
                 </div>
@@ -138,7 +141,7 @@ const AI_RESPONCES = {
             </div>
 
             <div className="border-t border-gray-200 p-4">
-              <div className="flex space-x-2">
+              <div className="flex space-x-2 text-[24px] font-regular">
                 <input
                   type="text"
                   value={input}
@@ -150,40 +153,41 @@ const AI_RESPONCES = {
                 <button
                   onClick={handleSend}
                   disabled={loading || !input.trim()}
-                  className="bg-green-600 text-white px-6 py-2.5 rounded-lg hover:bg-green-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  <Send className="w-5 h-5" />
-                </button>
+                  className="bg-[#14AE5C] text-white px-6 py-2.5 rounded-lg hover:bg-[#129C53] transition"
+             >
+                 <Send className="w-6 h-6" />
+           </button>
+
               </div>
             </div>
           </div>
           <div className="mt-10 grid gap-4 md:grid-cols-3">
-            <Card className="bg-gradient-card border-border hover:shadow-md transition-smooth">
+            <Card className="bg-gradient-card border-border hover:shadow-md transition-smooth ">
               <CardHeader>
-                <CardTitle className="text-base">Quick Tip</CardTitle>
+                <CardTitle className="text-[24px] font-semibold ">Quick Tip</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-[23px] text-muted-foreground font-regular">
                   Rinse containers before recycling to prevent contamination.
                 </p>
               </CardContent>
             </Card>
              <Card className="bg-gradient-card border-border hover:shadow-md transition-smooth">
               <CardHeader>
-                <CardTitle className="text-base">Did You Know?</CardTitle>
+                <CardTitle className="text-[24px] font-semibold">Did You Know?</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-[23px] text-muted-foreground font-regular">
                   Composting can reduce waste by up to 30%.
                 </p>
               </CardContent>
             </Card>
              <Card className="bg-gradient-card border-border hover:shadow-md transition-smooth">
               <CardHeader>
-                <CardTitle className="text-base">Pro Tip</CardTitle>
+                <CardTitle className="text-[24px] font-semibold">Pro Tip</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-[23px] text-muted-foreground font-regular">
                   Use reusable bags and containers to minimize single-use plastics.
                 </p>
               </CardContent>
