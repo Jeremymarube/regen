@@ -83,3 +83,15 @@ user_community = db.Table('user_community',
     db.Column('community_id', db.String(36), db.ForeignKey('communities.id'), primary_key=True),
     db.Column('joined_at', db.DateTime, default=datetime.utcnow)
 )
+
+class Message(db.Model):
+    __tablename__ = 'messages'
+    
+    id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))  # Consistent ID type
+    user_id = db.Column(db.String(36), db.ForeignKey('users.id'), nullable=False)
+    role = db.Column(db.String(20), nullable=False)  # 'user' or 'assistant'
+    content = db.Column(db.Text, nullable=False)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    
+    # Relationship
+    user = db.relationship('User', backref=db.backref('messages', lazy=True))
