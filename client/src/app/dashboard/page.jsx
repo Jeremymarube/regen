@@ -59,12 +59,12 @@ function DashboardContent() {
             <StatCard
               icon={<Leaf className="w-6 h-6 text-green-600" />}
               label="CO₂ Saved"
-              value={`${profile?.total_co2_saved?.toFixed(2) || 0} kg`}
+              value={`${(profile?.total_co2_saved ?? 0).toFixed(2)} kg`}
             />
             <StatCard
               icon={<Recycle className="w-6 h-6 text-green-600" />}
               label="Waste Recycled"
-              value={`${profile?.total_waste_recycled?.toFixed(2) || 0} kg`}
+              value={`${(profile?.total_waste_recycled ?? 0).toFixed(2)} kg`}
             />
             <StatCard
               icon={<Award className="w-6 h-6 text-green-600" />}
