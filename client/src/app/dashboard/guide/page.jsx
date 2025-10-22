@@ -178,6 +178,10 @@ const AI_RESPONCES = {
                 </p>
               </CardContent>
             </Card>
+             <Card className="bg-gradient-card border-border hover:shadow-md transition-smooth">
+              <CardHeader>
+                <CardTitle className="text-base">Pro Tip</CardTitle>
+              </CardHeader>
 
         </div>
       </div>
