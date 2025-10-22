@@ -157,7 +157,17 @@ const AI_RESPONCES = {
               </div>
             </div>
           </div>
-          
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            <Card className="bg-gradient-card border-border hover:shadow-md transition-smooth">
+              <CardHeader>
+                <CardTitle className="text-base">Quick Tip</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  Rinse containers before recycling to prevent contamination.
+                </p>
+              </CardContent>
+            </Card>
 
         </div>
       </div>
