@@ -16,7 +16,7 @@ def register():
         if User.query.filter_by(email=data['email']).first():
             return jsonify({'message': 'User already exists'}), 400
         
-        user = User(
+        user = User(     # created a new user object with a unique UUID, setting email and optional fields
             id=str(uuid.uuid4()),
             name=data.get('name', ''),
             email=data['email'],
