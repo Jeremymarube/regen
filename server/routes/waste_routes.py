@@ -160,4 +160,4 @@ def delete_waste_log(log_id):
     except Exception as e:  # if an error occurs, rollback the transaction 
         db.session.rollback()
         print(f"Delete waste log error: {e}")
-        return jsonify({'message': 'Failed to delete waste log'}), 500 # return a generic server error response
+        return jsonify({'message': 'Failed to delete waste log'}), 500 # return a generic server error response 

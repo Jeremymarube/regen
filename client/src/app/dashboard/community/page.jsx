@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Trophy, TrendingUp, Award } from 'lucide-react';
 
 const mockLeaderboard = [
-  { id: '1', name: 'John Doe', location: 'Nairobi', points: 1250, total_co2_saved: 45.8, total_waste_recycled: 28.3 },
+  { id: '1', name: 'John Doe', location: 'Nairobi', points: 1250, total_co2_saved: 45.8, total_waste_recycled: 28.3 }, 
   { id: '2', name: 'Jane Smith', location: 'Mombasa', points: 980, total_co2_saved: 38.2, total_waste_recycled: 22.1 },
   { id: '3', name: 'Mike Johnson', location: 'Kisumu', points: 750, total_co2_saved: 29.5, total_waste_recycled: 18.7 },
   { id: '4', name: 'Sarah Williams', location: 'Nakuru', points: 620, total_co2_saved: 25.1, total_waste_recycled: 15.9 },

@@ -2,6 +2,13 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 from config import config
 from database import init_db
+
+# Import blueprints
+from routes.auth_routes import auth_bp
+from routes.dashboard_routes import dashboard_bp
+from routes.community_routes import community_bp
+from routes.waste_routes import waste_bp
+from routes.center_routes import center_bp
 from extensions import db, bcrypt, migrate, jwt
 
 def create_app():
@@ -26,6 +33,9 @@ def create_app():
 
     # Initialize database
     init_db(app)
+    CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}}, supports_credentials=True)
+    
+    # Register blueprints
 
     # Import and register blueprints
     from routes.auth_routes import auth_bp
@@ -39,6 +49,8 @@ def create_app():
     app.register_blueprint(dashboard_bp)
     app.register_blueprint(community_bp)
     app.register_blueprint(waste_bp)
+    app.register_blueprint(center_bp)
+    
 
     # Health check
     @app.route('/api/health')

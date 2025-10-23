@@ -42,6 +42,7 @@ export default function WasteForm({ onSuccess, onDataChange, selectedFacility, o
   const [region, setRegion] = useState('');
   const [collectionDate, setCollectionDate] = useState('');
   
+  // UI state
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
