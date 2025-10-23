@@ -20,6 +20,7 @@ class ApiService {
     }
 
     try {
+      console.log('Making request to:', url, 'with token:', token ? 'Yes' : 'No'); 
       const response = await fetch(url, config);
       
       if (response.status === 401) {
@@ -48,7 +49,7 @@ class ApiService {
 
   async handleResponse(response) {
     const data = await response.json();
-    
+    // modified error handling based on https status
     if (!response.ok) {
       throw new Error(data.message || `HTTP error! status: ${response.status}`);
     }
