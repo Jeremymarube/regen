@@ -31,3 +31,11 @@ def get_centers():
 def get_center(center_id):
     center = RecyclingCenter.query.get_or_404(center_id)
     return jsonify(center_schema.dump(center)), 200
+
+@center_bp.route('', methods=['POST'])
+def create_center():
+    data = request.get_json()
+    new_center = RecyclingCenter(**data)
+    db.session.add(new_center)
+    db.session.commit()
+    return jsonify(center_schema.dump(new_center)), 201
