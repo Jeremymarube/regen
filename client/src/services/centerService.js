@@ -65,3 +65,13 @@ class CenterService {
   async createCenter(data) {
     return await api.post('/api/recycling-centers', data);
   }
+    /**
+   * Update an existing recycling center
+   * 
+   * @param {string} centerId - Center ID
+   * @param {Object} data - Updated center data
+   * @returns {Promise<Object>} Updated center data
+   */
+  async updateCenter(centerId, data) {
+    return await api.put(/api/recycling-centers/${centerId}, data);
+  }
