@@ -26,3 +26,8 @@ def get_centers():
 
     centers = query.all()
     return jsonify(centers_schema.dump(centers)), 200
+
+@center_bp.route('/<int:center_id>', methods=['GET'])
+def get_center(center_id):
+    center = RecyclingCenter.query.get_or_404(center_id)
+    return jsonify(center_schema.dump(center)), 200
