@@ -1,8 +1,8 @@
-"""Add recycling centers table
+"""Initial migration
 
-Revision ID: 0389ed378a10
+Revision ID: 09a98c6970ec
 Revises: 
-Create Date: 2025-10-23 17:33:57.477845
+Create Date: 2025-10-23 21:50:23.626187
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '0389ed378a10'
+revision = '09a98c6970ec'
 down_revision = None
 branch_labels = None
 depends_on = None

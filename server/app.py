@@ -1,11 +1,14 @@
 from flask import Flask
 from flask_migrate import Migrate
+from flask_cors import CORS
 from database import db
 from routes.center_routes import center_bp
 from models import RecyclingCenter
 
 app = Flask(__name__)
 app.config.from_object('config.Config')
+
+CORS(app, origins=['http://localhost:3000'])
 
 db.init_app(app)
 
