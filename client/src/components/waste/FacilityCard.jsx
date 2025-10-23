@@ -101,3 +101,19 @@ export default function FacilityCard({ facility, isSelected, onSelect }) {
                 {type}
               </span>
             ))}
+             </div>
+        </div>
+      )}
+
+      {/* Selection Indicator */}
+      {isSelected && (
+        <div className="mt-3 pt-3 border-t border-green-200">
+          <div className="flex items-center space-x-2 text-green-700">
+            <CheckCircle className="w-4 h-4" />
+            <span className="text-xs font-medium">Selected for collection</span>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
