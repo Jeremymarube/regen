@@ -27,10 +27,10 @@ def register():
         db.session.add(user)
         db.session.commit()
         
-        token = generate_token(user.id)
+        token = generate_token(user.id) # generate a JSON Web Token (JWT) for the newly registered user for immediate authentication
         
         return jsonify({
-            'message': 'User created successfully',
+            'message': 'User created successfully', #return a success response with a welcome message the access token and user details
             'access_token': token,
             'user': user.to_dict()
         }), 201
