@@ -19,8 +19,9 @@ function ManageCentersContent() {
 
   const fetchCenters = async () => {
     try {
-      const data = await centerService.getCenters({ active_only: false });
-      setCenters(data);
+      const response = await centerService.getCenters({ active_only: false });
+      console.log('API Response:', response);
+      setCenters(Array.isArray(response) ? response : []);
     } catch (error) {
       console.error('Error fetching centers:', error);
     } finally {
