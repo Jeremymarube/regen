@@ -1,12 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { Trash2, Eye, X, Check } from 'lucide-react';
-
-const mockWasteLogs = [
-  { id: '1', waste_type: 'plastic', weight: 2.5, co2_saved: 6.25, date: '2024-01-15', collection_location: 'Nairobi CBD', collection_status: 'pending', collection_date: null, disposal_method: 'Recycling Center', image_url: '' },
-  { id: '2', waste_type: 'paper', weight: 1.2, co2_saved: 2.16, date: '2024-01-14', collection_location: 'Westlands', collection_status: 'scheduled', collection_date: '2024-01-20', disposal_method: 'Paper Recycling', image_url: '' },
-  { id: '3', waste_type: 'organic', weight: 3.0, co2_saved: 1.5, date: '2024-01-13', collection_location: 'Karen', collection_status: 'collected', collection_date: '2024-01-16', disposal_method: 'Composting', image_url: '' },
-];
+import wasteService from '@/services/wasteService';
 
 export default function ManageWaste() {
   const [wasteLogs, setWasteLogs] = useState([]);
@@ -15,15 +10,24 @@ export default function ManageWaste() {
   const [deleteConfirm, setDeleteConfirm] = useState(null);
 
   useEffect(() => {
-    setTimeout(() => {
-      setWasteLogs(mockWasteLogs);
-      setLoading(false);
-    }, 1000);
+    fetchWasteLogs();
   }, []);
 
-  const handleDelete = async (logId, co2Saved, weight) => {
+  const fetchWasteLogs = async () => {
     try {
-      console.log('Deleting log:', logId);
+      const response = await wasteService.getAllWasteLogs();
+      setWasteLogs(response.data || []);
+    } catch (error) {
+      console.error('Error fetching waste logs:', error);
+      setWasteLogs([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDelete = async (logId) => {
+    try {
+      await wasteService.deleteWasteLog(logId);
       setWasteLogs(prev => prev.filter(log => log.id !== logId));
       setDeleteConfirm(null);
     } catch (error) {
@@ -34,6 +38,7 @@ export default function ManageWaste() {
 
   const handleUpdateStatus = async (logId, newStatus) => {
     try {
+      await wasteService.updateStatus(logId, newStatus);
       setWasteLogs(prev => prev.map(log => 
         log.id === logId ? { ...log, collection_status: newStatus } : log
       ));
@@ -102,7 +107,7 @@ export default function ManageWaste() {
                         </select>
                       </td>
                       <td className="px-6 py-4 text-sm font-medium text-green-600">
-                        {log.co2_saved.toFixed(2)} kg
+                        {log.co2_saved?.toFixed(2)} kg
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex items-center space-x-2">
@@ -116,7 +121,7 @@ export default function ManageWaste() {
                           {deleteConfirm === log.id ? (
                             <>
                               <button
-                                onClick={() => handleDelete(log.id, log.co2_saved, log.weight)}
+                                onClick={() => handleDelete(log.id)}
                                 className="p-2 text-green-600 hover:bg-green-50 rounded transition"
                                 title="Confirm delete"
                               >
@@ -174,15 +179,15 @@ function ViewLogModal({ log, onClose }) {
         <div className="space-y-4">
           <DetailRow label="Waste Type" value={log.waste_type} />
           <DetailRow label="Weight" value={`${log.weight} kg`} />
-          <DetailRow label="CO₂ Saved" value={`${log.co2_saved.toFixed(2)} kg`} />
+          <DetailRow label="CO₂ Saved" value={`${log.co2_saved?.toFixed(2) || '0'} kg`} />
           <DetailRow label="Collection Location" value={log.collection_location || 'Not specified'} />
-          <DetailRow label="Collection Status" value={log.collection_status} />
+          <DetailRow label="Collection Status" value={log.collection_status || 'pending'} />
           <DetailRow
             label="Collection Date"
             value={log.collection_date ? new Date(log.collection_date).toLocaleDateString() : 'Not set'}
           />
           <DetailRow label="Date Logged" value={new Date(log.date).toLocaleString()} />
-          <DetailRow label="Disposal Method" value={log.disposal_method} />
+          <DetailRow label="Disposal Method" value={log.disposal_method || 'Not specified'} />
           {log.image_url && (
             <div>
               <p className="text-sm font-medium text-gray-700 mb-2">Image</p>
@@ -214,7 +219,7 @@ function DetailRow({ label, value }) {
   return (
     <div className="border-b border-gray-100 pb-3">
       <p className="text-sm font-medium text-gray-700 mb-1">{label}</p>
-      <p className="text-gray-900 capitalize">{value}</p>
+      <p className="text-gray-900 capitalize">{value || 'N/A'}</p>
     </div>
   );
 }

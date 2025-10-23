@@ -28,7 +28,7 @@ export default function WasteLogItem({ log }) {
         </div>
       </div>
       <div className="text-right">
-        <div className="text-sm font-medium text-green-600">{log.co2_saved.toFixed(2)} kg CO₂</div>
+        <div className="text-sm font-medium text-green-600">{(log.co2_saved || 0).toFixed(2)} kg CO₂</div>
         <div className="text-xs text-gray-500">{new Date(log.date).toLocaleDateString()}</div>
       </div>
     </div>

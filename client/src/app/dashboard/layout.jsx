@@ -25,9 +25,9 @@ export default function DashboardLayout({ children }) {
       {/* Sidebar */}
       <Sidebar />
 
-      {/* Main content area - reduced spacing between navbar and content */}
-      <main className="flex-1 ml-[240px] px-6 py-6">
-        <div className="max-w-8xl mx-auto">{children}</div>
+      {/* Main content area */}
+      <main className="flex-1 ml-50 px-8 py-10">
+        <div className="max-w-7xl mx-auto">{children}</div>
       </main>
     </div>
   );

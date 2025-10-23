@@ -10,6 +10,8 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [showReset, setShowReset] = useState(false);
   const [resetEmail, setResetEmail] = useState('');
+  const [newPassword, setNewPassword] = useState(''); // Fixed: was missing
+  const [confirmPassword, setConfirmPassword] = useState(''); // Fixed: was missing
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
@@ -35,14 +37,30 @@ export default function Login() {
     e.preventDefault();
     setError('');
     setSuccess('');
+    
+    if (newPassword !== confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+    
+    if (newPassword.length < 6) {
+      setError('Password must be at least 6 characters');
+      return;
+    }
+    
     setLoading(true);
     
     try {
-      await resetPassword(resetEmail);
-      setSuccess('Password reset email sent! Check your inbox.');
-      setTimeout(() => setShowReset(false), 3000);
+      await resetPassword(resetEmail, newPassword);
+      setSuccess('Password reset successfully!');
+      setTimeout(() => {
+        setShowReset(false);
+        setResetEmail('');
+        setNewPassword('');
+        setConfirmPassword('');
+      }, 2000);
     } catch (err) {
-      setError(err.message || 'Failed to send reset email');
+      setError(err.message || 'Failed to reset password');
     } finally {
       setLoading(false);
     }
@@ -57,7 +75,7 @@ export default function Login() {
               <Leaf className="w-8 h-8 text-white" />
             </div>
             <h1 className="text-3xl font-bold text-gray-900">Reset Password</h1>
-            <p className="text-gray-600 mt-2">Enter your email to receive reset instructions</p>
+            <p className="text-gray-600 mt-2">Enter your email and new password</p>
           </div>
           <div className="bg-white rounded-lg shadow-sm p-8">
             {error && (
@@ -84,22 +102,54 @@ export default function Login() {
                   placeholder="you@example.com"
                 />
               </div>
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full bg-green-600 text-white py-2.5 rounded-lg font-medium hover:bg-green-700 transition disabled:opacity-50"
-              >
-                {loading ? 'Sending...' : 'Send Reset Link'}
-              </button>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  New Password
+                </label>
+                <input
+                  type="password"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  required
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
+                  placeholder="Enter new password"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Confirm New Password
+                </label>
+                <input
+                  type="password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
+                  placeholder="Confirm new password"
+                />
+              </div>
+              <div className="flex gap-4">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowReset(false);
+                    setResetEmail('');
+                    setNewPassword('');
+                    setConfirmPassword('');
+                  }}
+                  className="flex-1 bg-gray-600 text-white py-2.5 rounded-lg font-medium hover:bg-gray-700 transition"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="flex-1 bg-green-600 text-white py-2.5 rounded-lg font-medium hover:bg-green-700 transition disabled:opacity-50"
+                >
+                  {loading ? 'Resetting...' : 'Reset Password'}
+                </button>
+              </div>
             </form>
-            <div className="mt-6 text-center">
-              <button
-                onClick={() => setShowReset(false)}
-                className="text-green-600 hover:text-green-700 font-medium"
-              >
-                Back to Sign In
-              </button>
-            </div>
           </div>
         </div>
       </div>
@@ -111,10 +161,10 @@ export default function Login() {
       <div className="max-w-md w-full">
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-green-600 rounded-full mb-4">
-            <Leaf className="w-8 h-8 text-white" />
+            <Leaf className="w-8 h-8 text-white " />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900">Welcome Back</h1>
-          <p className="text-gray-600 mt-2">Sign in to continue your sustainability journey</p>
+          <h1 className="text-3xl font-bold text-gray-900 font-serif">Welcome Back</h1>
+          <p className="text-black mt-2 font-serif font-semi-bold">Sign in to continue your sustainability journey</p>
         </div>
         <div className="bg-white rounded-lg shadow-sm p-8">
           {error && (
@@ -124,7 +174,7 @@ export default function Login() {
           )}
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-bold text-black mb-2 font-serif">
                 Email Address
               </label>
               <input
@@ -137,7 +187,7 @@ export default function Login() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-bold text-black mb-2 font-serif">
                 Password
               </label>
               <input
@@ -161,13 +211,13 @@ export default function Login() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-green-600 text-white py-2.5 rounded-lg font-medium hover:bg-green-700 transition disabled:opacity-50"
+              className="w-full bg-green-600 text-white py-2.5 rounded-lg font-serif hover:bg-green-700 transition disabled:opacity-50"
             >
               {loading ? 'Signing in...' : 'Sign In'}
             </button>
           </form>
 
-          <div className="mt-6 text-center text-sm text-gray-600">
+          <div className="mt-6 text-center text-sm text-black font-serif">
             Don&apos;t have an account?{' '}
             <Link href="/auth/register" className="text-green-600 hover:text-green-700 font-medium">
               Sign up

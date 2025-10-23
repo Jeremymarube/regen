@@ -5,6 +5,7 @@ import { useAuth } from '@/context/AuthContext';
 import ProtectedRoute from '@/components/auth/ProtectedRoute';
 import Sidebar from '@/components/layout/Sidebar';
 import wasteService from '@/services/wasteService';
+import api from '@/services/api';
 import { TrendingUp, Recycle, Award, Leaf } from 'lucide-react';
 import StatCard from '@/components/dashboard/StatCard';
 import ImpactItem from '@/components/dashboard/ImpactItem';
@@ -13,18 +14,24 @@ import WasteLogItem from '@/components/dashboard/WasteLogItem';
 function DashboardContent() {
   const { profile } = useAuth();
   const [wasteLogs, setWasteLogs] = useState([]);
+  const [stats, setStats] = useState({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchWasteLogs();
+    fetchDashboardData();
   }, []);
 
-  const fetchWasteLogs = async () => {
+  const fetchDashboardData = async () => {
     try {
-      const data = await wasteService.getWasteLogs(10);
-      setWasteLogs(data);
+      const [statsResponse, wasteResponse] = await Promise.all([
+        api.get('/api/dashboard/'),
+        wasteService.getWasteLogs(10)
+      ]);
+      
+      setStats(statsResponse.data || {});
+      setWasteLogs(wasteResponse.data || []);
     } catch (error) {
-      console.error('Error fetching waste logs:', error);
+      console.error('Error fetching dashboard data:', error);
     } finally {
       setLoading(false);
     }
@@ -59,22 +66,22 @@ function DashboardContent() {
             <StatCard
               icon={<Leaf className="w-6 h-6 text-green-600" />}
               label="CO₂ Saved"
-              value={`${(profile?.total_co2_saved ?? 0).toFixed(2)} kg`}
+              value={`${(stats.total_co2_saved || 0).toFixed(2)} kg`}
             />
             <StatCard
               icon={<Recycle className="w-6 h-6 text-green-600" />}
               label="Waste Recycled"
-              value={`${(profile?.total_waste_recycled ?? 0).toFixed(2)} kg`}
+              value={`${(stats.total_waste_recycled || 0).toFixed(2)} kg`}
             />
             <StatCard
               icon={<Award className="w-6 h-6 text-green-600" />}
               label="Points Earned"
-              value={profile?.points?.toString() || '0'}
+              value={`${(stats.points || 0).toString()}`}
             />
             <StatCard
               icon={<TrendingUp className="w-6 h-6 text-green-600" />}
               label="Total Entries"
-              value={wasteLogs.length.toString()}
+              value={`${(stats.total_entries || 0).toString()}`}
             />
           </div>
 
@@ -110,17 +117,17 @@ function DashboardContent() {
               <div className="space-y-6">
                 <ImpactItem
                   label="Trees Equivalent"
-                  value={((profile?.total_co2_saved || 0) / 20).toFixed(1)}
+                  value={((stats.total_co2_saved || 0) / 20).toFixed(1)}
                   description="trees planted"
                 />
                 <ImpactItem
                   label="Energy Saved"
-                  value={((profile?.total_waste_recycled || 0) * 0.5).toFixed(1)}
+                  value={((stats.total_waste_recycled || 0) * 0.5).toFixed(1)}
                   description="kWh equivalent"
                 />
                 <ImpactItem
                   label="Water Conserved"
-                  value={((profile?.total_waste_recycled || 0) * 10).toFixed(0)}
+                  value={((stats.total_waste_recycled || 0) * 10).toFixed(0)}
                   description="liters saved"
                 />
               </div>

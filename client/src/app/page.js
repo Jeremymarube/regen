@@ -23,7 +23,7 @@ export default function Home() {
               </p>
               <div className="flex gap-10">
                 <Link
-                  href="/register"
+                  href="/auth/register"
                 className="flex items-center justify-center rounded-lg transition"
              style={{
                width: '134px',            // button width
@@ -45,7 +45,7 @@ export default function Home() {
                   <ArrowRight className="w-5 h-5" />
                 </Link>
                <Link
-  href="/login"
+  href="/auth/login"
   className="flex items-center justify-center rounded-lg border-2 border-[#008236] text-[#008236] font-medium hover:bg-green-50 transition"
   style={{
     width: '81px',             // button width
@@ -122,7 +122,7 @@ export default function Home() {
             Join thousands of users who are building a sustainable future, one action at a time.
           </p>
           <Link
-            href="/register"
+            href="/auth/register"
             className="bg-white text-green-600 px-8 py-3 rounded-lg font-medium hover:bg-gray-100 transition inline-flex items-center space-x-2 text-[30px]"
           >
             <span>Start Your Journey</span>
