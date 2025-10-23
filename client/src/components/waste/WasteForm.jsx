@@ -32,21 +32,9 @@ const KENYA_REGIONS = [
   'Other'
 ];
 
-/**
- * WasteForm Component
- * 
- * Comprehensive form for logging waste entries
- * Handles waste type, weight, location, collection scheduling, and facility selection
- * 
- * @param {Function} onSuccess - Callback function on successful submission
- * @param {Function} onDataChange - Callback when form data changes (region/wasteType)
- * @param {string} selectedFacility - Currently selected facility ID
- * @param {Function} onFacilityChange - Callback to update selected facility
- */
 export default function WasteForm({ onSuccess, onDataChange, selectedFacility, onFacilityChange }) {
   const { user, profile, updateProfile } = useAuth();
   
-  // Form state
   const [wasteType, setWasteType] = useState('');
   const [weight, setWeight] = useState('');
   const [imageUrl, setImageUrl] = useState('');
@@ -54,12 +42,10 @@ export default function WasteForm({ onSuccess, onDataChange, selectedFacility, o
   const [region, setRegion] = useState('');
   const [collectionDate, setCollectionDate] = useState('');
   
-  // UI state
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  // Notify parent component when region or wasteType changes
   useEffect(() => {
     if (onDataChange) {
       onDataChange({ region, wasteType });
@@ -177,7 +163,7 @@ export default function WasteForm({ onSuccess, onDataChange, selectedFacility, o
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm p-15 w-200 h-180">
+    <div className="bg-white rounded-lg shadow-sm p-15 w-200 h-180 border border-[#D9D9D9]">
       {error && (
         <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg flex items-start">
           <span className="text-sm ">{error}</span>
@@ -191,10 +177,9 @@ export default function WasteForm({ onSuccess, onDataChange, selectedFacility, o
       )}
 
       <form onSubmit={handleSubmit} className="space-y-6 ">
-        {/* Waste Type and Weight */}
         <div className=" grid md:grid-cols-2 gap-6 ">
           <div>
-            <label htmlFor="wasteType" className="block  font-semibold text-[20px] text-gray-700 mb-2">
+            <label htmlFor="wasteType" className="block font-semibold text-[20px] text-gray-700 mb-2">
               Waste Type <span className="text-black-500">*</span>
             </label>
             <select
@@ -202,7 +187,7 @@ export default function WasteForm({ onSuccess, onDataChange, selectedFacility, o
               value={wasteType}
               onChange={(e) => setWasteType(e.target.value)}
               required
-              className="w-full px-4 py-2.5  border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition  text-[#000000] "
+              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition text-[#000000]"
             >
               <option value="">Select waste type</option>
               {WASTE_TYPES.map((type) => (
@@ -214,7 +199,7 @@ export default function WasteForm({ onSuccess, onDataChange, selectedFacility, o
           </div>
 
           <div>
-            <label htmlFor="weight" className="block  font-semibold text-[20px] text-gray-700 mb-2">
+            <label htmlFor="weight" className="block font-semibold text-[20px] text-gray-700 mb-2">
               Weight (kg) <span className="text-black-500">*</span>
             </label>
             <input
@@ -231,10 +216,9 @@ export default function WasteForm({ onSuccess, onDataChange, selectedFacility, o
           </div>
         </div>
 
-        {/* Region and Collection Address */}
         <div className="grid md:grid-cols-2 gap-6">
           <div>
-            <label htmlFor="region" className="block  font-semibold text-[20px] text-gray-700 mb-2">
+            <label htmlFor="region" className="block font-semibold text-[20px] text-gray-700 mb-2">
               Region <span className="text-black-500">*</span>
             </label>
             <div className="relative">
@@ -257,7 +241,7 @@ export default function WasteForm({ onSuccess, onDataChange, selectedFacility, o
           </div>
 
           <div>
-            <label htmlFor="collectionLocation" className="block  font-semibold text-[20px] text-gray-700 mb-2">
+            <label htmlFor="collectionLocation" className="block font-semibold text-[20px] text-gray-700 mb-2">
               Collection Address <span className="text-black-500">*</span>
             </label>
             <input
@@ -272,9 +256,8 @@ export default function WasteForm({ onSuccess, onDataChange, selectedFacility, o
           </div>
         </div>
 
-        {/* Collection Date */}
         <div>
-          <label htmlFor="collectionDate" className="block  font-semibold text-[20px] text-gray-700 mb-2">
+          <label htmlFor="collectionDate" className="block font-semibold text-[20px] text-gray-700 mb-2">
             Preferred Collection Date (Optional)
           </label>
           <div className="relative">
@@ -290,9 +273,8 @@ export default function WasteForm({ onSuccess, onDataChange, selectedFacility, o
           </div>
         </div>
 
-        {/* Selected Facility Display */}
         {selectedFacility && (
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <div className="bg-blue-50 border border-[#D9D9D9] rounded-lg p-4">
             <div className="flex items-center space-x-2">
               <Building2 className="w-5 h-5 text-blue-600" />
               <div>
@@ -303,9 +285,8 @@ export default function WasteForm({ onSuccess, onDataChange, selectedFacility, o
           </div>
         )}
 
-        {/* Image URL */}
         <div>
-          <label htmlFor="imageUrl" className="block  font-semibold text-[20px] text-gray-700 mb-2">
+          <label htmlFor="imageUrl" className="block font-semibold text-[20px] text-gray-700 mb-2">
             Image URL (Optional)
           </label>
           <div className="relative">
@@ -321,9 +302,8 @@ export default function WasteForm({ onSuccess, onDataChange, selectedFacility, o
           </div>
         </div>
 
-        {/* Disposal Method Info */}
         {wasteType && (
-          <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+          <div className="bg-green-50 border border-[#D9D9D9] rounded-lg p-4">
             <div className="flex items-start space-x-3">
               <Recycle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
               <div>
@@ -334,7 +314,6 @@ export default function WasteForm({ onSuccess, onDataChange, selectedFacility, o
           </div>
         )}
 
-        {/* Submit Button */}
         <button
           type="submit"
           disabled={loading}

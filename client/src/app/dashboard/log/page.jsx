@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
-// import ProtectedRoute from '@/components/auth/ProtectedRoute';
+import ProtectedRoute from '@/components/auth/ProtectedRoute';
 import wasteService from '@/services/wasteService';
 import centerService from '@/services/centerService';
 import WasteForm from '@/components/waste/WasteForm';
@@ -117,8 +117,8 @@ function WasteLogContent() {
 
 export default function WasteLogPage() {
   return (
-    // <ProtectedRoute>
+    <ProtectedRoute>
       <WasteLogContent />
-    // </ProtectedRoute>
+    </ProtectedRoute>
   );
 }
