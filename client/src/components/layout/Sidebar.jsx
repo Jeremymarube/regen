@@ -26,9 +26,9 @@ export default function Sidebar() {
 
 
   return (
-    // <aside className="w-52 bg-white border-r border-gray-200 h-screen fixed left-0 top-0 flex flex-col justify-between shadow-sm">
-     <aside className="w-56 bg-white border-r border-gray-200 h-screen fixed left-0 top-0 flex flex-col justify-between shadow-sm font-medium">
-    {/* Logo */}
+     //<aside className="fixed top-0 left-0 w-[180px] h-screen bg-white border-r border-gray-200 flex flex-col justify-between shadow-sm font-medium">
+      <aside className="fixed top-0 left-0 w-[180px] h-screen bg-white border-r border-gray-200 flex flex-col justify-between shadow-sm font-medium">
+     {/* Logo */}
     <div className="p-4 flex items-center justify-center border-b border-gray-100">
   <img
     src="/images/regen-logo.png"
@@ -46,7 +46,7 @@ export default function Sidebar() {
     <Link
       key={item.path}
       href={item.path}
-     className={`block px-4 py-2 rounded-md font-medium text-base ${
+     className={`block px-4 py-2 rounded-md font-medium text-[20px] ${
   pathname === item.path
     ? 'bg-gray-100 text-gray-900 font-semibold'
     : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
@@ -64,23 +64,26 @@ export default function Sidebar() {
       <div className="border-t border-gray-100 p-4 space-y-2">
         <Link
           href="/profile"
-          className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm ${
+          className={`flex items-center space-x-2 px-3 py-2 rounded-md text-[20px] font-medium ${
             pathname === '/profile'
               ? 'bg-gray-100 text-gray-900 font-semibold'
               : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
           }`}
         >
-          <User className="w-4 h-4" />
+          <User className="w-6 h-6" />
           <span>{profile?.name || 'Profile'}</span>
         </Link>
         <button
           onClick={handleSignOut}
-          className="flex items-center space-x-2 w-full px-3 py-2 rounded-md text-sm text-gray-700 hover:bg-red-50 hover:text-red-600"
+          className="flex items-center font-medium space-x-2 w-full px-3 py-2 rounded-md text-[20px] text-gray-700 hover:bg-red-50 hover:text-red-600"
         >
-          <LogOut className="w-4 h-4" />
+          <LogOut className="w-6 h-6" />
           <span>Logout</span>
         </button>
       </div>
     </aside>
   );
 }
+
+
+

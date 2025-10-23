@@ -39,5 +39,5 @@ class WasteService {
   }
 }
 
-const wasteService = new WasteService(); // ✅ instance created safely
-export default wasteService; // ✅ ensures stable import recognition
+const wasteService = new WasteService(); //  instance created safely
+export default wasteService; //  ensures stable import recognition
