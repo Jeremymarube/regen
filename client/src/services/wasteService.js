@@ -9,12 +9,12 @@ import api from './api';
 class WasteService {
   // Create a new waste log entry
   async createWasteLog(data) {
-    return await api.post('/api/waste-logs', data);
+    return await api.post('/api/waste-logs/', data);
   }
 
   // Get waste logs for current user
   async getWasteLogs(limit) {
-    const endpoint = limit ? `/api/waste-logs?limit=${limit}` : '/api/waste-logs';
+    const endpoint = limit ? `/api/waste-logs/?limit=${limit}` : '/api/waste-logs/';
     return await api.get(endpoint);
   }
 
