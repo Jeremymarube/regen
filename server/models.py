@@ -109,9 +109,13 @@ class RecyclingCenter(db.Model):
     id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     name = db.Column(db.String(100), nullable=False)
     location = db.Column(db.String(255), nullable=False)
-    accepted_types = db.Column(db.String(255))  # comma-separated waste types
+    accepted_types = db.Column(db.String(255))
     latitude = db.Column(db.Float)
     longitude = db.Column(db.Float)
+    facility_type = db.Column(db.String(50), default='recycling')  # Add this
+    contact = db.Column(db.String(100))  # Add this
+    operating_hours = db.Column(db.String(100))  # Add this
+    is_active = db.Column(db.Boolean, default=True)  # Add this
 
 # ========================
 # REWARD MODEL
