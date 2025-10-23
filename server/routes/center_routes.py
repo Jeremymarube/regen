@@ -39,3 +39,14 @@ def create_center():
     db.session.add(new_center)
     db.session.commit()
     return jsonify(center_schema.dump(new_center)), 201
+
+@center_bp.route('/<int:center_id>', methods=['PUT'])
+def update_center(center_id):
+    center = RecyclingCenter.query.get_or_404(center_id)
+    data = request.get_json()
+
+    for key, value in data.items():
+        setattr(center, key, value)
+
+    db.session.commit()
+    return jsonify(center_schema.dump(center)), 200
