@@ -4,13 +4,13 @@ from jwt_handler import generate_token, decode_token
 import uuid
 # define a blueprint for authentication routes it groups routes under the '/api/auth' URL prefix
 auth_bp = Blueprint('auth', __name__, url_prefix='/api/auth')
-
+# routes for user registration accessible via POST request to /api/auth/register
 @auth_bp.route('/register', methods=['POST'])
 def register():
     try:
-        data = request.get_json()
+        data = request.get_json() # get JSON data email,password,name,location from the request body
         
-        if not data or not data.get('email') or not data.get('password'):
+        if not data or not data.get('email') or not data.get('password'): # validation of the essential fields eg email and password
             return jsonify({'message': 'Email and password required'}), 400
         
         if User.query.filter_by(email=data['email']).first():
