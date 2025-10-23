@@ -19,3 +19,18 @@ class CenterService {
    */
   async getCenters(filters = {}) {
     const params = new URLSearchParams();
+      if (filters.facility_type) {
+      params.append('facility_type', filters.facility_type);
+    }
+    if (filters.region) {
+      params.append('region', filters.region);
+    }
+    if (filters.waste_type) {
+      params.append('waste_type', filters.waste_type);
+    }
+    if (filters.active_only !== undefined) {
+      params.append('active_only', filters.active_only);
+    }
+    
+    const queryString = params.toString();
+    const endpoint = queryString ? /api/recycling-centers?${queryString} : '/api/recycling-centers';
