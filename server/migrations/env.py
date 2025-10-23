@@ -94,6 +94,7 @@ def run_migrations_online():
     if conf_args.get("process_revision_directives") is None:
         conf_args["process_revision_directives"] = process_revision_directives
 
+def run_migrations_online():
     connectable = get_engine()
 
     with connectable.connect() as connection:
