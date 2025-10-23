@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify, current_app
 from models import User, db
 from jwt_handler import generate_token, decode_token
 import uuid
-
+# define a blueprint for authentication routes it groups routes under the '/api/auth' URL prefix
 auth_bp = Blueprint('auth', __name__, url_prefix='/api/auth')
 
 @auth_bp.route('/register', methods=['POST'])
@@ -87,6 +87,45 @@ def reset_password():
     except Exception as e:
         db.session.rollback()
         return jsonify({'message': 'Password reset failed'}), 500
+
+@auth_bp.route('/profile', methods=['PUT'])
+def update_profile():
+    try:
+        token = request.headers.get('Authorization', '').replace('Bearer ', '')
+        user_id = decode_token(token)
+        
+        if not user_id:
+            return jsonify({'message': 'Invalid token'}), 401
+        
+        user = User.query.get(user_id)
+        if not user:
+            return jsonify({'message': 'User not found'}), 404
+        
+        data = request.get_json()
+        
+        # Update allowed fields
+        if 'name' in data:
+            user.name = data['name']
+        if 'location' in data:
+            user.location = data['location']
+        if 'total_co2_saved' in data:
+            user.total_co2_saved = data['total_co2_saved']
+        if 'total_waste_recycled' in data:
+            user.total_waste_recycled = data['total_waste_recycled']
+        if 'points' in data:
+            user.points = data['points']
+        
+        db.session.commit()
+        
+        return jsonify({
+            'message': 'Profile updated successfully',
+            'user': user.to_dict()
+        }), 200
+        
+    except Exception as e:
+        db.session.rollback()
+        print(f"Update profile error: {e}")
+        return jsonify({'message': 'Failed to update profile'}), 500
 
 @auth_bp.route('/me', methods=['GET'])
 def get_current_user():
