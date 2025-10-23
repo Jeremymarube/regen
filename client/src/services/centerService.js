@@ -19,7 +19,8 @@ class CenterService {
    */
   async getCenters(filters = {}) {
     const params = new URLSearchParams();
-      if (filters.facility_type) {
+    
+    if (filters.facility_type) {
       params.append('facility_type', filters.facility_type);
     }
     if (filters.region) {
@@ -33,9 +34,9 @@ class CenterService {
     }
     
     const queryString = params.toString();
-    const endpoint = queryString ? /api/recycling-centers?${queryString} : '/api/recycling-centers';
-
-      return await api.get(endpoint);
+    const endpoint = queryString ? `/api/recycling-centers?${queryString}` : '/api/recycling-centers';
+    
+    return await api.get(endpoint);
   }
 
   /**
@@ -45,9 +46,10 @@ class CenterService {
    * @returns {Promise<Object>} Recycling center data
    */
   async getCenter(centerId) {
-    return await api.get(/api/recycling-centers/${centerId});
+    return await api.get(`/api/recycling-centers/${centerId}`);
   }
-    /**
+
+  /**
    * Create a new recycling center
    * 
    * @param {Object} data - Center data
@@ -65,7 +67,8 @@ class CenterService {
   async createCenter(data) {
     return await api.post('/api/recycling-centers', data);
   }
-    /**
+
+  /**
    * Update an existing recycling center
    * 
    * @param {string} centerId - Center ID
@@ -73,5 +76,18 @@ class CenterService {
    * @returns {Promise<Object>} Updated center data
    */
   async updateCenter(centerId, data) {
-    return await api.put(/api/recycling-centers/${centerId}, data);
+    return await api.put(`/api/recycling-centers/${centerId}`, data);
   }
+
+  /**
+   * Delete a recycling center
+   * 
+   * @param {string} centerId - Center ID
+   * @returns {Promise<Object>} Deletion confirmation
+   */
+  async deleteCenter(centerId) {
+    return await api.delete(`/api/recycling-centers/${centerId}`);
+  }
+}
+
+export default new CenterService();
