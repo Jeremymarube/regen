@@ -1,5 +1,5 @@
 from flask import Flask
-from database import db
+from database import init_db, db
 from routes import center_bp
 
 app = Flask(__name__)
