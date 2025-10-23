@@ -50,3 +50,10 @@ def update_center(center_id):
 
     db.session.commit()
     return jsonify(center_schema.dump(center)), 200
+
+@center_bp.route('/<int:center_id>', methods=['DELETE'])
+def delete_center(center_id):
+    center = RecyclingCenter.query.get_or_404(center_id)
+    db.session.delete(center)
+    db.session.commit()
+    return jsonify({"message": "Center deleted successfully"}), 200
