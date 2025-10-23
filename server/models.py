@@ -9,6 +9,8 @@ class RecyclingCenter(db.Model):
     latitude = db.Column(db.Float, nullable=True)
     longitude = db.Column(db.Float, nullable=True)
     facility_type = db.Column(db.String(50), nullable=False, default='recycling')
+    contact = db.Column(db.String(120), nullable=True)
+    operating_hours = db.Column(db.String(120), nullable=True)
 
 
 
