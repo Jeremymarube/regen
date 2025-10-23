@@ -50,3 +50,4 @@ htmlcov/
 dist/
 build/
 *.egg-info/
+script.py.mako
