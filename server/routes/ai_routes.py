@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from ai.chatbot_assistant import get_ai_response
 # from flask_jwt_extended import jwt_required, get_jwt_identity
-from database import db
+from extensions import db
 from models import Message, User
 
 ai_bp = Blueprint("ai", __name__)

@@ -55,7 +55,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
    return (
     <div className="flex">
       <Sidebar />
-       <div className="ml-14 flex-1 min-h-screen bg-gray-50  px-6">
+       <div className="ml-2 flex-1 min-h-screen bg-gray-50  px-2">
         <div className="max-w-7xl mx-auto"> 
         
           <div className="mb-8">
@@ -66,7 +66,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
             </p>
           </div>
            
-                <div className="bg-white rounded-lg shadow-sm flex flex-col h-[600px] w-full px-6">
+                <div className="bg-white rounded-lg shadow-sm flex flex-col h-[500px] w-full max-w-5xl px-6">
   <div className="flex-1 overflow-y-auto p-6 space-y-4">
     {messages.map((message) => (
       <div

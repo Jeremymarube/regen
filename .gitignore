@@ -114,3 +114,10 @@ Thumbs.db
 node_modules/
 .next/
 EOF
+script py mako
+
+echo "__pycache__/" >> .gitignore
+echo "*.pyc" >> .gitignore
+# Make sure venv is in .gitignore
+echo "venv/" >> .gitignore
+echo "server/venv/" >> .gitignore
