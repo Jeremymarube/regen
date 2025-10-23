@@ -7,6 +7,8 @@ class RecyclingCenter(db.Model):
     name = db.Column(db.String(120), nullable=False)
     location = db.Column(db.String(255), nullable=False)
     latitude = db.Column(db.Float, nullable=True)
+    longitude = db.Column(db.Float, nullable=True)
+    facility_type = db.Column(db.String(50), nullable=False, default='recycling')
 
 
 
