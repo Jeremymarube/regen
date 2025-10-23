@@ -91,3 +91,6 @@ temp/
 *.pem
 
 script py mako
+
+echo "__pycache__/" >> .gitignore
+echo "*.pyc" >> .gitignore
