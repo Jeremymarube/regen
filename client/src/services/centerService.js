@@ -34,3 +34,16 @@ class CenterService {
     
     const queryString = params.toString();
     const endpoint = queryString ? /api/recycling-centers?${queryString} : '/api/recycling-centers';
+
+      return await api.get(endpoint);
+  }
+
+  /**
+   * Get a single recycling center by ID
+   * 
+   * @param {string} centerId - Center ID
+   * @returns {Promise<Object>} Recycling center data
+   */
+  async getCenter(centerId) {
+    return await api.get(/api/recycling-centers/${centerId});
+  }
