@@ -34,7 +34,8 @@ export default function FacilityCard({ facility, isSelected, onSelect }) {
       onSelect(facility.id);
     }
   };
-   return (
+
+  return (
     <div
       onClick={handleClick}
       className={`
@@ -49,7 +50,7 @@ export default function FacilityCard({ facility, isSelected, onSelect }) {
       <div className="flex items-start justify-between mb-3">
         <div className="flex-1">
           <div className="flex items-start space-x-2">
-            <Building2 className={w-4 h-4 mt-0.5 flex-shrink-0 ${isSelected ? 'text-green-600' : 'text-gray-400'}} />
+            <Building2 className={`w-4 h-4 mt-0.5 flex-shrink-0 ${isSelected ? 'text-green-600' : 'text-gray-400'}`} />
             <h4 className="font-semibold text-sm text-gray-900 leading-tight">
               {facility.name}
             </h4>
@@ -101,7 +102,7 @@ export default function FacilityCard({ facility, isSelected, onSelect }) {
                 {type}
               </span>
             ))}
-             </div>
+          </div>
         </div>
       )}
 
