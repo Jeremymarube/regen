@@ -11,6 +11,10 @@ class RecyclingCenter(db.Model):
     facility_type = db.Column(db.String(50), nullable=False, default='recycling')
     contact = db.Column(db.String(120), nullable=True)
     operating_hours = db.Column(db.String(120), nullable=True)
+    accepted_types = db.Column(db.JSON, nullable=True, default=list)
+    is_active = db.Column(db.Boolean, default=True)
+
+
 
 
 
