@@ -47,3 +47,21 @@ class CenterService {
   async getCenter(centerId) {
     return await api.get(/api/recycling-centers/${centerId});
   }
+    /**
+   * Create a new recycling center
+   * 
+   * @param {Object} data - Center data
+   * @param {string} data.name - Center name
+   * @param {string} data.location - Center location
+   * @param {number} data.latitude - Latitude coordinate
+   * @param {number} data.longitude - Longitude coordinate
+   * @param {Array<string>} data.accepted_types - Accepted waste types
+   * @param {string} data.contact - Contact information
+   * @param {string} data.facility_type - Facility type (recycling/dumpsite/biogas)
+   * @param {boolean} data.is_active - Active status
+   * @param {string} data.operating_hours - Operating hours
+   * @returns {Promise<Object>} Created center data
+   */
+  async createCenter(data) {
+    return await api.post('/api/recycling-centers', data);
+  }
