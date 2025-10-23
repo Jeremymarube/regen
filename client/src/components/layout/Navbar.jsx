@@ -55,7 +55,7 @@ export default function Navbar() {
               Community Impact
             </button>
             <Link
-              href="/login"
+              href="/auth/login"
               className="text-white px-5 py-2 rounded-lg font-semibold transition-colors bg-[#008236] hover:bg-[#006b2d] text-[20px]"
              >
               Sign In
