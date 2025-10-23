@@ -39,7 +39,7 @@ def register():
         db.session.rollback()
         return jsonify({'message': 'Registration failed'}), 500
 
-@auth_bp.route('/login', methods=['POST'])
+@auth_bp.route('/login', methods=['POST']) # route for user login acccessible via post request to /api/auth/login
 def login():
     try:
         data = request.get_json()
@@ -88,7 +88,7 @@ def reset_password():
         db.session.rollback()
         return jsonify({'message': 'Password reset failed'}), 500
 
-@auth_bp.route('/profile', methods=['PUT'])
+@auth_bp.route('/profile', methods=['PUT']) # route for updating the users profile info requires authentication and accessible via PUT request to api/auth/profile
 def update_profile():
     try:
         token = request.headers.get('Authorization', '').replace('Bearer ', '')
@@ -127,7 +127,7 @@ def update_profile():
         print(f"Update profile error: {e}")
         return jsonify({'message': 'Failed to update profile'}), 500
 
-@auth_bp.route('/me', methods=['GET'])
+@auth_bp.route('/me', methods=['GET']) # route for retrieving the current user's profile info requires authentication
 def get_current_user():
     try:
         token = request.headers.get('Authorization', '').replace('Bearer ', '')
@@ -143,10 +143,10 @@ def get_current_user():
         if not user:
             return jsonify({'message': 'User not found'}), 404
         
-        return jsonify({
+        return jsonify({           # return a success response with the current users details it returns user and profile fields both containing user data
             'user': user.to_dict(),
             'profile': user.to_dict()
         }), 200
         
-    except Exception as e:
+    except Exception as e: # return a generic error response if authentication or fetching fails
         return jsonify({'message': 'Authentication failed'}), 500
