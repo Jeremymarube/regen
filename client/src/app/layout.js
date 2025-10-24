@@ -4,7 +4,7 @@ import { AuthProvider } from "@/context/AuthContext";
 
 const rasa = Rasa({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"], // Adjust as per your Figma use
+  weight: ["400", "500", "600", "700"],
   variable: "--font-rasa",
 });
 
@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${rasa.variable} font-sans antialiased bg-gray-50`}
+        className={`${rasa.variable} font-rasa antialiased bg-gray-50`}
       >
         <AuthProvider>
           {children}
