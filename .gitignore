@@ -1,3 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+
+# Flask
+instance/
+.webassets-cache
+
+# Database
 # ========================
 # Node / Next.js
 # ========================
@@ -58,6 +76,35 @@ Pipfile.lock
 
 # Environment variables
 .env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Migrations (optional - some people commit these)
+# migrations/versions/*.py
+
+# Logs
+*.log
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+script.py.mako
 .env.*
 !.env.example
 

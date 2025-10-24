@@ -1,13 +1,9 @@
-from flask_sqlalchemy import SQLAlchemy
-from extensions import db, bcrypt
+from database import db
 from flask_bcrypt import Bcrypt
 from datetime import datetime
 import uuid
 
-
-# db = SQLAlchemy()
-# bcrypt = Bcrypt()
-
+bcrypt = Bcrypt()
 # ========================
 # USER MODEL
 # ========================

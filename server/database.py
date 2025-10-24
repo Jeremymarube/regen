@@ -1,17 +1,12 @@
-#from flask_sqlalchemy import SQLAlchemy
+# server/database.py
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
-# db = SQLAlchemy()
-
-# def init_db(app):
-#     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///regen.db'
-#     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-#     db.init_app(app)
-    
-#     with app.app_context():
-#         db.create_all()
-from extensions import db  # Import from extensions
+# Initialize extensions
+db = SQLAlchemy()
+migrate = Migrate()
 
 def init_db(app):
-    # No need for db.init_app(app) here since it's done in app.py
-    with app.app_context():
-        db.create_all()
+    """Initialize database and migration with Flask app"""
+    db.init_app(app)
+    migrate.init_app(app, db)
