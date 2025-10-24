@@ -7,3 +7,10 @@ class Config:
     SQLALCHEMY_DATABASE_URI = f"sqlite:///{os.path.join(BASE_DIR, 'app.db')}"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = os.environ.get('SECRET_KEY', 'dev')
+
+# Configuration dictionary
+config = {
+    'default': Config,
+    'development': Config,
+    'production': Config
+}
