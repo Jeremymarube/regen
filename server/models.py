@@ -100,6 +100,23 @@ class WasteLog(db.Model):
     collection_date = db.Column(db.DateTime)
 
 # ========================
+# RECYCLING CENTER MODEL
+# ========================
+class RecyclingCenter(db.Model):
+    __tablename__ = 'recycling_centers'
+    
+    id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    name = db.Column(db.String(100), nullable=False)
+    location = db.Column(db.String(255), nullable=False)
+    accepted_types = db.Column(db.String(255))
+    latitude = db.Column(db.Float)
+    longitude = db.Column(db.Float)
+    facility_type = db.Column(db.String(50), default='recycling')
+    contact = db.Column(db.String(100))
+    operating_hours = db.Column(db.String(100))
+    is_active = db.Column(db.Boolean, default=True)
+
+# ========================
 # REWARD MODEL
 # ========================
 class Reward(db.Model):
