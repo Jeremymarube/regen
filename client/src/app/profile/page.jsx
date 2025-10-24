@@ -21,8 +21,8 @@ function ProfileContent() {
   useEffect(() => {
     fetchDashboardStats();
     if (profile) {
-      setName(profile.name);
-      setLocation(profile.location);
+      setName(profile.name || '');
+      setLocation(profile.location || '');
     }
   }, [profile]);
 

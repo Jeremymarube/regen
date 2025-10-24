@@ -147,7 +147,7 @@ from app import create_app
 app = create_app()
 
 with app.app_context():
-    from models import User, WasteLog, RecyclingCenter, Reward, Community, Message
+    from models import User, WasteLog, Reward, Community, Message
     target_metadata = current_app.extensions['migrate'].db.metadata
 
 def run_migrations_offline():

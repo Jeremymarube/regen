@@ -8,7 +8,6 @@ from routes.auth_routes import auth_bp
 from routes.dashboard_routes import dashboard_bp
 from routes.community_routes import community_bp
 from routes.waste_routes import waste_bp
-from routes.center_routes import center_bp
 from extensions import db, bcrypt, migrate, jwt
 
 def create_app():
@@ -29,7 +28,7 @@ def create_app():
     CORS(app, origins=["http://localhost:3000"])
 
     # Import models HERE - after db.init_app(app)
-    from models import User, WasteLog, RecyclingCenter, Reward, Community, Message
+    from models import User, WasteLog, Reward, Community, Message
 
     # Initialize database
     init_db(app)
@@ -49,7 +48,6 @@ def create_app():
     app.register_blueprint(dashboard_bp)
     app.register_blueprint(community_bp)
     app.register_blueprint(waste_bp)
-    app.register_blueprint(center_bp)
     
 
     # Health check
