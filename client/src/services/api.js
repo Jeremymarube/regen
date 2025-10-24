@@ -12,8 +12,11 @@ const api = {
       },
       credentials: 'include',
     });
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     const data = await response.json();
+    if (!response.ok) {
+      const errorMessage = data.message || `HTTP error! status: ${response.status}`;
+      throw new Error(errorMessage);
+    }
     return { data };
   },
 
@@ -27,8 +30,11 @@ const api = {
       credentials: 'include',
       body: JSON.stringify(data),
     });
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     const responseData = await response.json();
+    if (!response.ok) {
+      const errorMessage = responseData.message || `HTTP error! status: ${response.status}`;
+      throw new Error(errorMessage);
+    }
     return { data: responseData };
   },
 
@@ -42,8 +48,11 @@ const api = {
       credentials: 'include',
       body: JSON.stringify(data),
     });
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     const responseData = await response.json();
+    if (!response.ok) {
+      const errorMessage = responseData.message || `HTTP error! status: ${response.status}`;
+      throw new Error(errorMessage);
+    }
     return { data: responseData };
   },
 
@@ -56,8 +65,11 @@ const api = {
       },
       credentials: 'include',
     });
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     const responseData = await response.json();
+    if (!response.ok) {
+      const errorMessage = responseData.message || `HTTP error! status: ${response.status}`;
+      throw new Error(errorMessage);
+    }
     return { data: responseData };
   },
 };
