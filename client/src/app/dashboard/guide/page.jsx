@@ -30,12 +30,17 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
     setMessages(prev => [...prev, userMessage]);
     setInput('');
     setLoading(true);
+    
     try {
-    const res = await fetch('http://127.0.0.1:5000/api/ai-guide', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ message: userMessage.content })
-});
+      const res = await fetch('http://127.0.0.1:5000/api/ai-guide', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: userMessage.content })
+      });
+
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
 
       const data = await res.json();
       const assistantMessage = {
@@ -45,7 +50,14 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
       };
       setMessages(prev => [...prev, assistantMessage]);
     } catch (err) {
-      console.error(err);
+      console.error('AI Guide Error:', err);
+      // Show error message to user
+      const errorMessage = {
+        id: (Date.now() + 1).toString(),
+        role: 'assistant',
+        content: 'Sorry, I encountered an error. Please try again.'
+      };
+      setMessages(prev => [...prev, errorMessage]);
     } finally {
       setLoading(false);
     }
