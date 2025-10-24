@@ -30,6 +30,22 @@ def create_app():
     app.register_blueprint(waste_bp)
     app.register_blueprint(center_bp)
     
+    @app.route('/')
+    def index():
+        return jsonify({
+            'message': 'Welcome to ReGen API',
+            'status': 'running',
+            'version': '1.0.0',
+            'endpoints': {
+                'health': '/api/health',
+                'auth': '/api/auth/*',
+                'dashboard': '/api/dashboard',
+                'community': '/api/community/*',
+                'waste_logs': '/api/waste-logs/*',
+                'recycling_centers': '/api/recycling-centers/*'
+            }
+        })
+    
     @app.route('/api/health')
     def health_check():
         return jsonify({'status': 'healthy', 'message': 'ReGen API is running'})
