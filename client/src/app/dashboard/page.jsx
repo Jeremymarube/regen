@@ -28,11 +28,12 @@ function DashboardContent() {
         wasteService.getWasteLogs(10)
       ]);
       
-      setStats(statsResponse.data || {});
-      // wasteResponse.data contains { message, data }, so we need wasteResponse.data.data
+      // Both endpoints return { message, data }, so we need .data.data
+      setStats(statsResponse.data?.data || {});
       setWasteLogs(wasteResponse.data?.data || []);
     } catch (error) {
       console.error('Error fetching dashboard data:', error);
+      setStats({});
       setWasteLogs([]); // Ensure wasteLogs is always an array
     } finally {
       setLoading(false);
