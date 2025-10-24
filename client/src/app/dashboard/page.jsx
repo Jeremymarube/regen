@@ -29,9 +29,11 @@ function DashboardContent() {
       ]);
       
       setStats(statsResponse.data || {});
-      setWasteLogs(wasteResponse.data || []);
+      // wasteResponse.data contains { message, data }, so we need wasteResponse.data.data
+      setWasteLogs(wasteResponse.data?.data || []);
     } catch (error) {
       console.error('Error fetching dashboard data:', error);
+      setWasteLogs([]); // Ensure wasteLogs is always an array
     } finally {
       setLoading(false);
     }
