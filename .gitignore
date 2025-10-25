@@ -172,3 +172,6 @@ echo "server/venv/" >> .gitignore
 # Ignore local script files
 start-backend.sh
 start-frontend.sh
+
+# Local documentation
+RUNNING.md
