@@ -19,11 +19,13 @@ function ManageCentersContent() {
 
   const fetchCenters = async () => {
     try {
-      const response = await centerService.getCenters({ active_only: false });
-      console.log('API Response:', response);
-      setCenters(Array.isArray(response) ? response : []);
+      setLoading(true);
+      const centers = await centerService.getCenters({ active_only: false });
+      console.log('Fetched centers:', centers);
+      setCenters(centers);
     } catch (error) {
       console.error('Error fetching centers:', error);
+      setCenters([]);
     } finally {
       setLoading(false);
     }
@@ -48,6 +50,8 @@ function ManageCentersContent() {
     );
   }
 
+  console.log('Rendering with centers:', centers);
+  
   return (
     <div className="flex">
       <Sidebar />
@@ -67,19 +71,34 @@ function ManageCentersContent() {
             </button>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {centers.map((center) => (
-              <CenterCard
-                key={center.id}
-                center={center}
-                onEdit={() => setEditingCenter(center)}
-                onDelete={() => setDeleteConfirm(center.id)}
-                onConfirmDelete={() => handleDelete(center.id)}
-                onCancelDelete={() => setDeleteConfirm(null)}
-                showDeleteConfirm={deleteConfirm === center.id}
-              />
-            ))}
-          </div>
+          {centers.length === 0 ? (
+            <div className="bg-white rounded-lg shadow-sm p-12 text-center">
+              <Building2 className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+              <h3 className="text-lg font-medium text-gray-900">No recycling centers found</h3>
+              <p className="mt-2 text-gray-500">Get started by adding a new recycling center</p>
+              <button
+                onClick={() => setShowAddForm(true)}
+                className="mt-6 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition inline-flex items-center space-x-2"
+              >
+                <Plus className="w-5 h-5" />
+                <span>Add Your First Center</span>
+              </button>
+            </div>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {centers.map((center) => (
+                <CenterCard
+                  key={center.id}
+                  center={center}
+                  onEdit={() => setEditingCenter(center)}
+                  onDelete={() => setDeleteConfirm(center.id)}
+                  onConfirmDelete={() => handleDelete(center.id)}
+                  onCancelDelete={() => setDeleteConfirm(null)}
+                  showDeleteConfirm={deleteConfirm === center.id}
+                />
+              ))}
+            </div>
+          )}
 
           {showAddForm && (
             <CenterFormModal

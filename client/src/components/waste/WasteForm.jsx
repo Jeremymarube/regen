@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import wasteService from '@/services/wasteService';
 import profileService from '@/services/profileService';
-import { Upload, Recycle, MapPin, Calendar, Building2, Loader2 } from 'lucide-react';
+import { Recycle, MapPin, Calendar, Building2, Loader2 } from 'lucide-react';
 
 const WASTE_TYPES = [
   'Plastic',
@@ -83,13 +83,42 @@ export default function WasteForm({ onSuccess, onDataChange, selectedFacility, o
     return methods[type] || 'Consult local waste management guidelines';
   };
 
+  const uploadImage = async (file) => {
+    if (!file) return null;
+    
+    const formData = new FormData();
+    formData.append('file', file);
+    
+    try {
+      const response = await fetch('http://127.0.0.1:5000/api/upload', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+        },
+        body: formData,
+      });
+      
+      if (!response.ok) {
+        throw new Error('Image upload failed');
+      }
+      
+      const data = await response.json();
+      return data.url; // URL of the uploaded image
+    } catch (err) {
+      console.error('Error uploading image:', err);
+      throw new Error('Failed to upload image. Please try again.');
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setSuccess('');
+    setLoading(true);
 
     if (!wasteType || !weight || !collectionLocation || !region) {
       setError('Please fill in all required fields');
+      setLoading(false);
       return;
     }
 
@@ -102,13 +131,15 @@ export default function WasteForm({ onSuccess, onDataChange, selectedFacility, o
     setLoading(true);
 
     try {
+      const finalImageUrl = imageUrl || null;
+
       const co2Saved = calculateCO2Saved(wasteType, weightNum);
       const disposalMethod = getDisposalMethod(wasteType);
 
       const wasteLogData = {
         waste_type: wasteType,
         weight: weightNum,
-        image_url: imageUrl || null,
+        image_url: finalImageUrl,
         co2_saved: co2Saved,
         disposal_method: disposalMethod,
         collection_location: `${collectionLocation}, ${region}`,
@@ -290,16 +321,39 @@ export default function WasteForm({ onSuccess, onDataChange, selectedFacility, o
           <label htmlFor="imageUrl" className="block font-semibold text-[20px] text-gray-700 mb-2">
             Image URL (Optional)
           </label>
-          <div className="relative">
-            <Upload className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
-            <input
-              id="imageUrl"
-              type="url"
-              value={imageUrl}
-              onChange={(e) => setImageUrl(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition text-[#000000]"
-              placeholder="https://example.com/image.jpg"
-            />
+          <div className="space-y-2">
+            <div className="relative">
+              <input
+                type="url"
+                id="imageUrl"
+                value={imageUrl}
+                onChange={(e) => setImageUrl(e.target.value)}
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition text-[#000000]"
+                placeholder="Paste image URL (e.g., https://example.com/image.jpg)"
+              />
+              {imageUrl && (
+                <button
+                  type="button"
+                  onClick={() => setImageUrl('')}
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                >
+                  ✕
+                </button>
+              )}
+            </div>
+            {imageUrl && (
+              <div className="mt-2">
+                <img 
+                  src={imageUrl} 
+                  alt="Preview" 
+                  className="max-h-40 mx-auto rounded-lg border border-gray-200"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    setError('Could not load image from the provided URL. Please check the URL and try again.');
+                  }}
+                />
+              </div>
+            )}
           </div>
         </div>
 

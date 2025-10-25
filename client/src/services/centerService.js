@@ -36,7 +36,8 @@ class CenterService {
     const queryString = params.toString();
     const endpoint = queryString ? `/api/recycling-centers/?${queryString}` : '/api/recycling-centers/';
     const response = await api.get(endpoint);
-    return response.data || []; //extract the data array
+    // Return the data array from the response
+    return response.data?.data || [];
   }
 
   /**

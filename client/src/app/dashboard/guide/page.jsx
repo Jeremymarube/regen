@@ -12,7 +12,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
       {
         id: 1,
         role: 'assistant',
-         content: 'Hello! I\'m your AI sustainability assistant. I can help you with:\n\n• Waste disposal and recycling guidance\n• Finding nearby recycling centers\n• Converting agricultural waste to biogas\n• Reducing your carbon footprint\n• Sustainable living tips\n\nWhat would you like to know?'
+        content: 'Hello! I\'m your AI sustainability assistant. I can help you with:\n\n• Waste disposal and recycling guidance\n• Finding nearby recycling centers\n• Converting agricultural waste to biogas\n• Reducing your carbon footprint\n• Sustainable living tips\n\nWhat would you like to know?'
       }
     ]);
      const [input, setInput] = useState('');

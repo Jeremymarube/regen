@@ -10,6 +10,7 @@ from routes.community_routes import community_bp
 from routes.waste_routes import waste_bp
 from routes.center_routes import center_bp
 from routes.ai_routes import ai_bp
+from routes.file_routes import file_bp
 
 def create_app():
     app = Flask(__name__)
@@ -19,7 +20,19 @@ def create_app():
     init_db(app)
     
     # CORS configuration
-    CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}}, supports_credentials=True)
+    CORS(app, resources={
+        r"/api/*": {
+            "origins": "http://localhost:3000",
+            "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+            "allow_headers": ["Content-Type", "Authorization"],
+            "supports_credentials": True
+        },
+        r"/uploads/*": {
+            "origins": "http://localhost:3000",
+            "methods": ["GET"],
+            "supports_credentials": True
+        }
+    })
     
     # Import models after db initialization
     from models import User, WasteLog, Reward, Community, Message, RecyclingCenter
@@ -31,6 +44,7 @@ def create_app():
     app.register_blueprint(waste_bp)
     app.register_blueprint(center_bp)
     app.register_blueprint(ai_bp)
+    app.register_blueprint(file_bp)
     
     @app.route('/')
     def index():

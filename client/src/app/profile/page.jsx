@@ -29,7 +29,9 @@ function ProfileContent() {
   const fetchDashboardStats = async () => {
     try {
       const response = await api.get('/api/dashboard/');
-      setStats(response.data || {});
+      console.log('Dashboard stats response:', response.data); // Debug log
+      // The stats are in response.data.data
+      setStats(response.data?.data || {});
     } catch (error) {
       console.error('Error fetching dashboard stats:', error);
       setStats({});

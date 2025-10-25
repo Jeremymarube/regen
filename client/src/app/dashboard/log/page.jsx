@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import ProtectedRoute from '@/components/auth/ProtectedRoute';
 import wasteService from '@/services/wasteService';
-//import centerService from '@/services/centerService';
+import centerService from '@/services/centerService';
 import WasteForm from '@/components/waste/WasteForm';
 import FacilityCard from '@/components/waste/FacilityCard';
 import { Building2 } from 'lucide-react';

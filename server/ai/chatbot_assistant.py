@@ -22,10 +22,17 @@ def get_ai_response(message):
         response = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[
-                {"role": "system", "content": "You are ReGen — an AI waste and sustainability assistant. You give practical, friendly guidance on recycling, biogas, composting, and sustainability."},
+                {
+                    "role": "system", 
+                    "content": """You are ReGen, an AI waste and sustainability assistant. 
+                    Provide specific, actionable advice. Avoid repeating the list of topics.
+                    If asked for sustainable living tips, give practical examples and tips 
+                    without restating the list of topics you can help with."""
+                },
                 {"role": "user", "content": message}
             ],
-            max_tokens=200
+            max_tokens=300,
+            temperature=0.7
         )
 
         return response.choices[0].message.content.strip()
