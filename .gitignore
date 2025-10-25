@@ -168,3 +168,7 @@ echo "*.pyc" >> .gitignore
 # Make sure venv is in .gitignore
 echo "venv/" >> .gitignore
 echo "server/venv/" >> .gitignore
+
+# Ignore local script files
+start-backend.sh
+start-frontend.sh
