@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-//import ProtectedRoute from '@/components/auth/ProtectedRoute';
+import ProtectedRoute from '@/components/auth/ProtectedRoute';
 import Sidebar from '@/components/layout/Sidebar';
 import centerService from '@/services/centerService';
 import { Plus, Edit2, Trash2, X, Check, Building2 } from 'lucide-react';
@@ -229,12 +229,14 @@ function CenterFormModal({ center, onClose, onSave }) {
         location: formData.location,
         latitude: parseFloat(formData.latitude) || 0,
         longitude: parseFloat(formData.longitude) || 0,
-        facility_type: formData.facility_type,
-        contact: formData.contact,
-        operating_hours: formData.operating_hours,
-        accepted_types: formData.accepted_types,
-        is_active: formData.is_active,
+        facility_type: formData.facility_type || 'recycling',
+        contact: formData.contact || '',
+        operating_hours: formData.operating_hours || 'Mon-Fri: 8AM-5PM',
+        accepted_types: Array.isArray(formData.accepted_types) ? formData.accepted_types : [],
+        is_active: formData.is_active !== undefined ? formData.is_active : true,
       };
+      
+      console.log('Submitting center data:', data); // Debug log
 
       if (center) {
         await centerService.updateCenter(center.id, data);
@@ -246,7 +248,37 @@ function CenterFormModal({ center, onClose, onSave }) {
       onClose();
     } catch (error) {
       console.error('Error saving center:', error);
-      alert('Failed to save recycling center');
+      
+      // Extract error message from response if available
+      let errorMessage = 'Failed to save recycling center';
+      
+      if (error.response) {
+        const { data } = error.response;
+        console.error('Error response data:', data);
+        
+        if (data.details) {
+          errorMessage = `${data.message}: ${data.details}`;
+        } else if (data.message) {
+          errorMessage = data.message;
+        }
+        
+        // Handle specific error types
+        if (data.error_type === 'duplicate_entry') {
+          // Highlight the name field if it's a duplicate
+          setFormData(prev => ({
+            ...prev,
+            _error: 'A center with this name already exists. Please choose a different name.'
+          }));
+        } else if (data.error_type === 'missing_required_fields') {
+          setFormData(prev => ({
+            ...prev,
+            _error: 'Please fill in all required fields marked with *'
+          }));
+        }
+      }
+      
+      // Show the error message
+      alert(errorMessage);
     }
   };
 
@@ -434,8 +466,8 @@ function CenterFormModal({ center, onClose, onSave }) {
 
 export default function ManageCenters() {
   return (
-    //<ProtectedRoute>
+    <ProtectedRoute>
       <ManageCentersContent />
-    //</ProtectedRoute>
+    </ProtectedRoute>
   );
 }

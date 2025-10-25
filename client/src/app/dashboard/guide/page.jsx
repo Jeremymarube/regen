@@ -2,7 +2,6 @@
 
 import {useState} from 'react';
 //import ProtectedRoute from '@/components/auth/ProtectedRoute';
-import Sidebar from '@/components/layout/Sidebar';
 import { Send, Bot, User, } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
@@ -65,9 +64,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
     
    return (
-    <div className="flex">
-      <Sidebar />
-       <div className="ml-2 flex-1 min-h-screen bg-gray-50  px-2">
+       <div className="flex-1 min-h-screen bg-gray-50  px-2">
         <div className="max-w-7xl mx-auto"> 
         
           <div className="mb-8">
@@ -186,14 +183,15 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
         </div>
       </div>
-    </div>
   );
 }
 
 export default function Guide() {
   return (
-    //<ProtectedRoute>
+    <>
+      {/* <ProtectedRoute> */}
       <GuideContent />
-    //</ProtectedRoute>
+      {/* </ProtectedRoute> */}
+    </>
   );
 }

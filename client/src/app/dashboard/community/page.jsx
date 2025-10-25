@@ -1,6 +1,5 @@
 'use client';
 import { useState, useEffect } from 'react';
-import Sidebar from '@/components/layout/Sidebar';
 import { Trophy, TrendingUp, Award } from 'lucide-react';
 
 const mockLeaderboard = [
@@ -41,9 +40,7 @@ export default function Community() {
   }
 
   return (
-    <div className="flex">
-      <Sidebar />
-      <div className="ml-2 flex-1 min-h-screen bg-gray-50 py-8 px-4">
+      <div className="flex-1 min-h-screen bg-gray-50 py-8 px-4">
         <div className="max-w-6xl mx-auto">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Community Leaderboard</h1>
@@ -92,7 +89,6 @@ export default function Community() {
           </div>
         </div>
       </div>
-    </div>
     </div>
   );
 }

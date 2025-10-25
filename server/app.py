@@ -1,7 +1,13 @@
+import logging
 from flask import Flask, jsonify
 from flask_cors import CORS
+from flask_bcrypt import Bcrypt
 from config import config
 from database import init_db
+
+# Configure logging
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
 
 # Import blueprints
 from routes.auth_routes import auth_bp
@@ -18,6 +24,7 @@ def create_app():
     
     # Initialize extensions
     init_db(app)
+    bcrypt = Bcrypt(app)
     
     # CORS configuration
     CORS(app, resources={

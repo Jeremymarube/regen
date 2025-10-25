@@ -1,6 +1,5 @@
 'use client';
 import { useState, useEffect } from 'react';
-import Sidebar from '@/components/layout/Sidebar';
 import { Trash2, Eye, X, Check } from 'lucide-react';
 import wasteService from '@/services/wasteService';
 
@@ -64,9 +63,7 @@ export default function ManageWaste() {
   }
 
   return (
-    <div className="flex">
-      <Sidebar />
-      <div className="ml-2 flex-1 min-h-screen bg-gray-50 py-8 px-4">
+      <div className="flex-1 min-h-screen bg-gray-50 py-8 px-4">
         <div className="max-w-7xl mx-auto">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Manage Waste Logs</h1>
@@ -168,7 +165,6 @@ export default function ManageWaste() {
           <ViewLogModal log={viewingLog} onClose={() => setViewingLog(null)} />
         )}
       </div>
-    </div>
     </div>
   );
 }

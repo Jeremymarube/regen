@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import ProtectedRoute from '@/components/auth/ProtectedRoute';
-import Sidebar from '@/components/layout/Sidebar';
 import wasteService from '@/services/wasteService';
 import api from '@/services/api';
 import { TrendingUp, Recycle, Award, Leaf } from 'lucide-react';
@@ -49,9 +48,7 @@ function DashboardContent() {
   }
 
   return (
-    <div className="flex">
-      <Sidebar />
-      <div className="ml-2 flex-1 min-h-screen bg-gray-50 py-8 px-4">
+    <div className="flex-1 min-h-screen bg-gray-50 py-8 px-4">
         <div className="max-w-7xl mx-auto">
 
           {/* Welcome Message */}
@@ -137,7 +134,6 @@ function DashboardContent() {
             </div>
           </div>
         </div>
-      </div>
     </div>
   );
 }
