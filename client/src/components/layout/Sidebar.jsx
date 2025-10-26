@@ -26,8 +26,7 @@ export default function Sidebar() {
 
 
   return (
-     //<aside className="fixed top-0 left-0 w-[180px] h-screen bg-white border-r border-gray-200 flex flex-col justify-between shadow-sm font-medium">
-      <aside className="fixed top-0 left-0 w-[180px] h-screen bg-white border-r border-gray-200 flex flex-col justify-between shadow-sm font-medium">
+      <aside className="fixed top-0 left-0 w-[180px] h-screen bg-[#F9F9F9] border-r border-gray-200 flex flex-col justify-between shadow-sm font-medium">
      {/* Logo */}
     <div className="p-4 flex items-center justify-center border-b border-gray-100">
   <img

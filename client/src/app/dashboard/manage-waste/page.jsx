@@ -66,8 +66,8 @@ export default function ManageWaste() {
       <div className="flex-1 min-h-screen bg-gray-50 py-8 px-4">
         <div className="max-w-7xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Manage Waste Logs</h1>
-          <p className="text-gray-600 mt-2">View, edit, and delete your waste entries</p>
+          <h1 className="text-[55px] font-bold text-gray-900">Manage Waste Logs</h1>
+          <p className="text-gray-600 font-regular text-[24px] mt-2">View, edit, and delete your waste entries</p>
         </div>
 
         {wasteLogs.length === 0 ? (
@@ -80,29 +80,29 @@ export default function ManageWaste() {
               <table className="w-full">
                 <thead className="bg-gray-50 border-b border-gray-200">
                   <tr>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Date</th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Type</th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Weight</th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Location</th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Status</th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">CO₂ Saved</th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Actions</th>
+                    <th className="px-6 py-4 text-left text-[24px] font-semibold text-gray-900">Date</th>
+                    <th className="px-6 py-4 text-left text-[24px] font-semibold text-gray-900">Type</th>
+                    <th className="px-6 py-4 text-left text-[24px] font-semibold text-gray-900">Weight</th>
+                    <th className="px-6 py-4 text-left text-[24px] font-semibold text-gray-900">Location</th>
+                    <th className="px-6 py-4 text-left text-[24px] font-semibold text-gray-900">Status</th>
+                    <th className="px-6 py-4 text-left text-[24px] font-semibold text-gray-900">CO₂ Saved</th>
+                    <th className="px-6 py-4 text-left text-[24px] font-semibold text-gray-900">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                   {(wasteLogs || []).map((log) => (
                     <tr key={log.id} className="hover:bg-gray-50 transition">
-                      <td className="px-6 py-4 text-sm text-gray-900">
+                      <td className="px-6 py-4 text-[24px] font-regular text-gray-900">
                         {new Date(log.date).toLocaleDateString()}
                       </td>
-                      <td className="px-6 py-4 text-sm text-gray-900 capitalize">{log.waste_type}</td>
-                      <td className="px-6 py-4 text-sm text-gray-900">{log.weight} kg</td>
-                      <td className="px-6 py-4 text-sm text-gray-600">{log.collection_location || 'N/A'}</td>
+                      <td className="px-6 py-4 text-[24px] text-gray-900 capitalize">{log.waste_type}</td>
+                      <td className="px-6 py-4 text-[24px] text-gray-900">{log.weight} kg</td>
+                      <td className="px-6 py-4 text-[24px] text-gray-600">{log.collection_location || 'N/A'}</td>
                       <td className="px-6 py-4">
                         <select
                           value={log.collection_status}
                           onChange={(e) => handleUpdateStatus(log.id, e.target.value)}
-                          className={`text-xs px-2 py-1 rounded border-none outline-none ${
+                          className={`text-xs px-2 text-[24px] font-regular py-1 rounded border-none outline-none ${
                             log.collection_status === 'collected' ? 'bg-green-100 text-green-700' :
                             log.collection_status === 'scheduled' ? 'bg-blue-100 text-blue-700' :
                             'bg-orange-100 text-orange-700'
@@ -113,7 +113,7 @@ export default function ManageWaste() {
                           <option value="collected">Collected</option>
                         </select>
                       </td>
-                      <td className="px-6 py-4 text-sm font-medium text-green-600">
+                      <td className="px-6 py-4 text-[24px] font-regular text-green-600">
                         {log.co2_saved?.toFixed(2)} kg
                       </td>
                       <td className="px-6 py-4">
@@ -123,7 +123,7 @@ export default function ManageWaste() {
                             className="p-2 text-blue-600 hover:bg-blue-50 rounded transition"
                             title="View details"
                           >
-                            <Eye className="w-4 h-4" />
+                            <Eye className="w-6 h-6" />
                           </button>
                           {deleteConfirm === log.id ? (
                             <>
@@ -148,7 +148,7 @@ export default function ManageWaste() {
                               className="p-2 text-red-600 hover:bg-red-50 rounded transition"
                               title="Delete"
                             >
-                              <Trash2 className="w-4 h-4" />
+                              <Trash2 className="w-6 h-6" />
                             </button>
                           )}
                         </div>

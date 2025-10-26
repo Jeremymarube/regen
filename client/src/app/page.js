@@ -14,10 +14,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-0 items-start">
             <div>
-              <h1 className="text-[50px] font-bold text-gray-900 leading-tight mb-6">
+              <h1 className="text-[60px] font-bold text-gray-900 leading-tight mb-6">
                 AI-Powered Waste & Sustainability Assistant
               </h1>
-                <p className="text-base text-gray-600 mb-8 leading-relaxed font-normal">
+                <p className="text-[20px] text-gray-600 mb-8 leading-relaxed font-regular">
                 Transform the way you manage waste. ReGen helps communities classify waste, track carbon footprints,
                 and build sustainable habits through AI-powered guidance.
               </p>

@@ -11,18 +11,14 @@ export default function Navbar() {
     }
   };
     return (
-      <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
+      <nav className="bg-[#F9F9F9] border-b border-gray-200 sticky top-0 z-50">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div className="flex justify-between items-center h-26">
       <button
         onClick={() => scrollToSection('hero')}
         className="flex items-center space-x-2 transition"
       >
-        {/* <img
-          src="/images/regen-logo.png" 
-          alt="ReGen Logo"
-          style={{ width: '84.66px', height: '65.85px', objectFit: 'contain' }}
-        /> */}
+        
         
       <img
   src="/images/regen-logo.png" 

@@ -65,11 +65,11 @@ function ProfileContent() {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="ml-64 flex-1 min-h-screen bg-gray-50 py-8 px-4">
-        <div className="max-w-2xl mx-auto">
+      <div className="ml-10 flex-1 min-h-screen bg-gray-50 py-8 px-4">
+        <div className="max-w-3xl mx-auto">
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900">Profile Settings</h1>
-            <p className="text-gray-600 mt-2">Manage your account information</p>
+            <h1 className="text-[55px] font-bold text-gray-900">Profile Settings</h1>
+            <p className="text-gray-600 text-[24px] font-regular">Manage your account information</p>
           </div>
 
           <div className="bg-white rounded-lg shadow-sm p-8">
@@ -78,29 +78,29 @@ function ProfileContent() {
                 <User className="w-10 h-10 text-green-600" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-gray-900">{profile?.name}</h2>
-                <p className="text-gray-500">{user?.email}</p>
+                <h2 className="text-[32px]  font-bold text-gray-900">{profile?.name}</h2>
+                <p className="text-black-500 text-[24px] font-regular">{user?.email}</p>
               </div>
             </div>
 
             <div className="grid md:grid-cols-3 gap-6 mb-8 pb-8 border-b border-gray-200">
               <div className="text-center">
-                <div className="text-3xl font-bold text-green-600 mb-1">
+                <div className="text-[40px] font-bold text-green-600 mb-1">
                   {statsLoading ? '...' : (stats.points || 0)}
                 </div>
-                <div className="text-sm text-gray-600">Total Points</div>
+                <div className="text-[20px] font-regular text-black-600">Total Points</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-green-600 mb-1">
+                <div className="text-[40px]  font-bold text-green-600 mb-1">
                   {statsLoading ? '...' : (stats.total_co2_saved?.toFixed(1) || '0.0')}
                 </div>
-                <div className="text-sm text-gray-600">kg CO₂ Saved</div>
+                <div className="text-[20px] font-regular text-black-600">kg CO₂ Saved</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-green-600 mb-1">
+                <div className="text-[40px] font-bold text-green-600 mb-1">
                   {statsLoading ? '...' : (stats.total_waste_recycled?.toFixed(1) || '0.0')}
                 </div>
-                <div className="text-sm text-gray-600">kg Recycled</div>
+                <div className="text-[20px] font-regular text-black-600">kg Recycled</div>
               </div>
             </div>
 
@@ -118,7 +118,7 @@ function ProfileContent() {
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-[20px] font-semibold text-black-700 mb-2">
                   Full Name
                 </label>
                 <div className="relative">
@@ -128,14 +128,14 @@ function ProfileContent() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
-                    className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
-                    placeholder="John Doe"
+                    className="w-full pl-10 pr-4 py-2.5 text-[16px] font-regular border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
+                    placeholder="Lauren"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-[20px] font-semibold text-black-700 mb-2">
                   Location
                 </label>
                 <div className="relative">
@@ -144,7 +144,7 @@ function ProfileContent() {
                     type="text"
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
+                    className="w-full pl-10 pr-4 py-2.5 text-[16px] font-regular border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
                     placeholder="City, Country"
                   />
                 </div>
@@ -153,9 +153,9 @@ function ProfileContent() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-green-600 text-white py-3 rounded-lg font-medium hover:bg-green-700 transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                className="w-full bg-green-600 text-white py-3 rounded-lg font-semibold text-[20px] hover:bg-green-700 transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
               >
-                <Save className="w-5 h-5" />
+                <Save className="w-6 h-6" />
                 <span>{loading ? 'Saving...' : 'Save Changes'}</span>
               </button>
             </form>

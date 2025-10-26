@@ -58,7 +58,7 @@ function WasteLogContent() {
     <div className="min-h-screen bg-gray-50 py-8 px-4 ">
       <div className="max-w-7xl mx-auto ">
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900">Log Your Waste</h1>
+          <h1 className="text-4xl font-bold text-black-900">Log Your Waste</h1>
           <p className="text-gray-600 text-regular text-[20px] mt-2">
             Track your recycling efforts and schedule waste collection
           </p>
