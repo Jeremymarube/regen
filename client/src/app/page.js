@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import Navbar from '../components/layout/Navbar';
+import Footer from '../components/layout/Footer';
 import { Recycle, Leaf, TrendingUp, Users, ArrowRight } from 'lucide-react';
 
 export default function Home() {
@@ -144,6 +145,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 }
