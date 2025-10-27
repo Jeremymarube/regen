@@ -54,9 +54,6 @@ function ManageCentersContent() {
   
   return (
     
-     <div className="flex">
-      <Sidebar />
-      <div className="ml-1 flex-1 min-h-screen bg-gray-50 py-8 px-4">
     
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-center mb-8">
@@ -117,8 +114,6 @@ function ManageCentersContent() {
             />
           )}
         </div>
-      </div>
-    </div>
   );
 }
 
