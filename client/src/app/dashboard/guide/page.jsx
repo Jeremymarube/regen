@@ -4,6 +4,7 @@ import {useState} from 'react';
 import ProtectedRoute from '@/components/auth/ProtectedRoute';
 import { Send, Bot, User, } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { API_ENDPOINTS } from '@/utils/constants';
 
 
   function GuideContent() {
@@ -31,7 +32,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
     setLoading(true);
     
     try {
-      const res = await fetch('https://regen-0n58.onrender.com/api/ai-guide', {
+      const res = await fetch(API_ENDPOINTS.AI_GUIDE, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: userMessage.content })
