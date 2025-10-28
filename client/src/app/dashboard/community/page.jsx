@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { Trophy, TrendingUp, Award } from 'lucide-react';
+import { API_ENDPOINTS } from '@/utils/constants';
 
 const mockLeaderboard = [
   { id: '1', name: 'John Doe', location: 'Nairobi', points: 1250, total_co2_saved: 45.8, total_waste_recycled: 28.3 }, 
@@ -17,7 +18,7 @@ export default function Community() {
   useEffect(() => {
   const fetchLeaderboard = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/community/leaderboard');
+      const response = await fetch(API_ENDPOINTS.COMMUNITY.LEADERBOARD);
       const data = await response.json();
       setLeaderboard(data.leaderboard || []);
     } catch (error) {
