@@ -3,33 +3,33 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Try to import OpenAI, but make it optional
+# Try to import Groq, but make it optional
 try:
-    import openai
-    api_key = os.getenv("OPENAI_API_KEY")
+    from groq import Groq
+    api_key = os.getenv("GROQ_API_KEY")
     if api_key:
-        openai.api_key = api_key
+        client = Groq(api_key=api_key)
         client_available = True
-        print("✅ OpenAI API key configured successfully")
+        print("✅ Groq API key configured successfully")
     else:
         client_available = False
-        print("⚠️ Warning: OPENAI_API_KEY not found in environment variables")
+        print("⚠️ Warning: GROQ_API_KEY not found in environment variables")
 except ImportError:
     client_available = False
-    print("❌ Warning: OpenAI library not installed")
+    print("❌ Warning: Groq library not installed")
 
 def get_ai_response(message):
-    """Return a real AI response from OpenAI GPT model or fallback response."""
+    """Return a real AI response from Groq LLM or fallback response."""
     
-    # If OpenAI is not configured, return a helpful fallback response
+    # If Groq is not configured, return a helpful fallback response
     if not client_available:
-        print(f"⚠️ Using fallback response - OpenAI not available")
+        print(f"⚠️ Using fallback response - Groq not available")
         return get_fallback_response(message)
     
     try:
-        print(f"🤖 Calling OpenAI API for message: {message[:50]}...")
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
+        print(f"🤖 Calling Groq API for message: {message[:50]}...")
+        response = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
             messages=[
                 {
                     "role": "system", 
@@ -45,11 +45,11 @@ def get_ai_response(message):
         )
 
         ai_response = response.choices[0].message.content.strip()
-        print(f"✅ OpenAI response received: {ai_response[:50]}...")
+        print(f"✅ Groq response received: {ai_response[:50]}...")
         return ai_response
 
     except Exception as e:
-        print(f"❌ OpenAI API Error: {e}")
+        print(f"❌ Groq API Error: {e}")
         return get_fallback_response(message)
 
 def get_fallback_response(message):
