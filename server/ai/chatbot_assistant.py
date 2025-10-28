@@ -10,13 +10,15 @@ try:
     if api_key:
         try:
             client = OpenAI(api_key=api_key)
+            print("✅ OpenAI client initialized successfully")
         except Exception as e:
-            print(f"Warning: Could not initialize OpenAI client: {e}")
+            print(f"❌ Warning: Could not initialize OpenAI client: {e}")
             client = None
     else:
+        print("⚠️ Warning: OPENAI_API_KEY not found in environment variables")
         client = None
 except ImportError:
-    print("Warning: OpenAI library not installed")
+    print("❌ Warning: OpenAI library not installed")
     client = None
 
 def get_ai_response(message):
@@ -24,9 +26,11 @@ def get_ai_response(message):
     
     # If OpenAI is not configured, return a helpful fallback response
     if not client:
+        print(f"⚠️ Using fallback response - OpenAI client not available")
         return get_fallback_response(message)
     
     try:
+        print(f"🤖 Calling OpenAI API for message: {message[:50]}...")
         response = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[
@@ -43,10 +47,12 @@ def get_ai_response(message):
             temperature=0.7
         )
 
-        return response.choices[0].message.content.strip()
+        ai_response = response.choices[0].message.content.strip()
+        print(f"✅ OpenAI response received: {ai_response[:50]}...")
+        return ai_response
 
     except Exception as e:
-        print("Error:", e)
+        print(f"❌ OpenAI API Error: {e}")
         return get_fallback_response(message)
 
 def get_fallback_response(message):
