@@ -1,4 +1,5 @@
 import logging
+import os
 from flask import Flask, jsonify
 from flask_cors import CORS
 from flask_bcrypt import Bcrypt
@@ -27,15 +28,18 @@ def create_app():
     bcrypt = Bcrypt(app)
     
     # CORS configuration
+    # Get allowed origins from environment variable or use defaults
+    allowed_origins = os.environ.get('ALLOWED_ORIGINS', 'http://localhost:3000').split(',')
+    
     CORS(app, resources={
         r"/api/*": {
-            "origins": "http://localhost:3000",
+            "origins": allowed_origins,
             "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
             "allow_headers": ["Content-Type", "Authorization"],
             "supports_credentials": True
         },
         r"/uploads/*": {
-            "origins": "http://localhost:3000",
+            "origins": allowed_origins,
             "methods": ["GET"],
             "supports_credentials": True
         }
