@@ -5,34 +5,31 @@ load_dotenv()
 
 # Try to import OpenAI, but make it optional
 try:
-    from openai import OpenAI
+    import openai
     api_key = os.getenv("OPENAI_API_KEY")
     if api_key:
-        try:
-            client = OpenAI(api_key=api_key)
-            print("✅ OpenAI client initialized successfully")
-        except Exception as e:
-            print(f"❌ Warning: Could not initialize OpenAI client: {e}")
-            client = None
+        openai.api_key = api_key
+        client_available = True
+        print("✅ OpenAI API key configured successfully")
     else:
+        client_available = False
         print("⚠️ Warning: OPENAI_API_KEY not found in environment variables")
-        client = None
 except ImportError:
+    client_available = False
     print("❌ Warning: OpenAI library not installed")
-    client = None
 
 def get_ai_response(message):
     """Return a real AI response from OpenAI GPT model or fallback response."""
     
     # If OpenAI is not configured, return a helpful fallback response
-    if not client:
-        print(f"⚠️ Using fallback response - OpenAI client not available")
+    if not client_available:
+        print(f"⚠️ Using fallback response - OpenAI not available")
         return get_fallback_response(message)
     
     try:
         print(f"🤖 Calling OpenAI API for message: {message[:50]}...")
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
             messages=[
                 {
                     "role": "system", 
