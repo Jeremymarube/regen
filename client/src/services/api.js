@@ -1,5 +1,5 @@
 // Base URL for your Flask backend
-const BASE_URL = 'http://127.0.0.1:5000';
+const BASE_URL = 'https://regen-0n58.onrender.com';
 
 // Helper function to get auth headers
 const getAuthHeaders = (additionalHeaders = {}) => {

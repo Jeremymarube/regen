@@ -31,7 +31,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
     setLoading(true);
     
     try {
-      const res = await fetch('http://127.0.0.1:5000/api/ai-guide', {
+      const res = await fetch('https://regen-0n58.onrender.com/api/ai-guide', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: userMessage.content })
