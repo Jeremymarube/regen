@@ -1,5 +1,5 @@
 // Base URL for your Flask backend
-const BASE_URL = 'https://regen-0n58.onrender.com';
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://regen-0n58.onrender.com/api';
 
 // Helper function to get auth headers
 const getAuthHeaders = (additionalHeaders = {}) => {

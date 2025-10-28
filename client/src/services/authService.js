@@ -2,7 +2,7 @@ import api from './api';
 
 class AuthService {
   async register(email, password, name) {
-    const response = await api.post('/api/auth/register', { email, password, name });
+    const response = await api.post('/auth/register', { email, password, name });
     const data = response.data;
     if (data.access_token) {
       this.setTokens(data.access_token, data.refresh_token);
@@ -11,7 +11,7 @@ class AuthService {
   }
 
   async login(email, password) {
-    const response = await api.post('/api/auth/login', { email, password });
+    const response = await api.post('/auth/login', { email, password });
     const data = response.data;
     if (data.access_token) {
       this.setTokens(data.access_token, data.refresh_token);
@@ -20,7 +20,7 @@ class AuthService {
   }
 
   async loginWithGoogle(token) {
-    const response = await api.post('/api/auth/google', { token });
+    const response = await api.post('/auth/google', { token });
     const data = response.data;
     if (data.access_token) {
       this.setTokens(data.access_token, data.refresh_token);
@@ -30,7 +30,7 @@ class AuthService {
 
   async resetPassword(email, newPassword) {
     console.log('DEBUG - resetPassword called with:', { email, newPassword });
-    const response = await api.post('/api/auth/reset-password', { 
+    const response = await api.post('/auth/reset-password', { 
       email, 
       new_password: newPassword 
     });
@@ -39,7 +39,7 @@ class AuthService {
   }
 
   async getCurrentUser() {
-    const response = await api.get('/api/auth/me');
+    const response = await api.get('/auth/me');
     return response.data;
   }
 
@@ -49,7 +49,7 @@ class AuthService {
       throw new Error('No refresh token');
     }
     
-    const response = await api.post('/api/auth/refresh', {}, {
+    const response = await api.post('/auth/refresh', {}, {
       headers: { 'Authorization': `Bearer ${refresh_token}` }
     });
     const data = response.data;
