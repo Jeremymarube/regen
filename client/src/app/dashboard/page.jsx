@@ -23,7 +23,7 @@ function DashboardContent() {
   const fetchDashboardData = async () => {
     try {
       const [statsResponse, wasteResponse] = await Promise.all([
-        api.get('/api/dashboard/'),
+        api.get('/dashboard/'),
         wasteService.getWasteLogs(10)
       ]);
       

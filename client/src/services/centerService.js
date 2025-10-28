@@ -34,7 +34,7 @@ class CenterService {
     }
     
     const queryString = params.toString();
-    const endpoint = queryString ? `/api/recycling-centers/?${queryString}` : '/api/recycling-centers/';
+    const endpoint = queryString ? `/recycling-centers/?${queryString}` : '/recycling-centers/';
     const response = await api.get(endpoint);
     // Return the data array from the response
     return response.data?.data || [];
@@ -47,7 +47,7 @@ class CenterService {
    * @returns {Promise<Object>} Recycling center data
    */
   async getCenter(centerId) {
-    return await api.get(`/api/recycling-centers/${centerId}`);
+    return await api.get(`/recycling-centers/${centerId}`);
   }
 
   /**
@@ -66,7 +66,7 @@ class CenterService {
    * @returns {Promise<Object>} Created center data
    */
   async createCenter(data) {
-    return await api.post('/api/recycling-centers/', data);
+    return await api.post('/recycling-centers/', data);
   }
 
   /**
@@ -77,7 +77,7 @@ class CenterService {
    * @returns {Promise<Object>} Updated center data
    */
   async updateCenter(centerId, data) {
-    return await api.put(`/api/recycling-centers/${centerId}`, data);
+    return await api.put(`/recycling-centers/${centerId}`, data);
   }
    
   async getNearbyFacilities(region, wasteType) {
@@ -95,7 +95,7 @@ class CenterService {
    * @returns {Promise<Object>} Deletion confirmation
    */
   async deleteCenter(centerId) {
-    return await api.delete(`/api/recycling-centers/${centerId}`);
+    return await api.delete(`/recycling-centers/${centerId}`);
   }
 }
 
