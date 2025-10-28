@@ -7,8 +7,16 @@ load_dotenv()
 try:
     from openai import OpenAI
     api_key = os.getenv("OPENAI_API_KEY")
-    client = OpenAI(api_key=api_key) if api_key else None
+    if api_key:
+        try:
+            client = OpenAI(api_key=api_key)
+        except Exception as e:
+            print(f"Warning: Could not initialize OpenAI client: {e}")
+            client = None
+    else:
+        client = None
 except ImportError:
+    print("Warning: OpenAI library not installed")
     client = None
 
 def get_ai_response(message):
