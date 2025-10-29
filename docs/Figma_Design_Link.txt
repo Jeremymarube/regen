@@ -2,8 +2,6 @@
 
 ## UI/UX Design Files
 
-### Main Design File
-**Status:** To be added by project owner
 
 **Instructions:**
 1. Create or locate your Figma design file
@@ -11,7 +9,7 @@
 3. Set permissions to "Anyone with the link can view"
 4. Copy the link and paste below
 
-**Figma Link:** [Add your Figma link here]
+**Figma Link:** [https://www.figma.com/design/QddXxtXbiVaeUk42zNWJnc/ReGen?node-id=0-1&t=Jjp1GdufJ45IomQG-1]
 
 ---
 
@@ -58,7 +56,6 @@ The frontend is already built using:
 
 ## Screenshots
 
-If you don't have Figma designs, you can document the current UI with screenshots:
 
 ```bash
 # Take screenshots of key pages:
@@ -81,4 +78,3 @@ If you don't have Figma designs, you can document the current UI with screenshot
 ---
 
 **Last Updated:** October 29, 2025
-**Status:** Awaiting Figma link from project owner
