@@ -1,11 +1,54 @@
 from flask import Blueprint, request, jsonify
 from models import RecyclingCenter, db
+from utils.pagination import paginate_query
 import uuid
 
 center_bp = Blueprint('center', __name__, url_prefix='/api/recycling-centers')
 
 @center_bp.route('/', methods=['GET'])
 def get_centers():
+    """
+    Get Recycling Centers (Paginated)
+    ---
+    tags:
+      - Recycling Centers
+    parameters:
+      - name: page
+        in: query
+        type: integer
+        default: 1
+        description: Page number
+      - name: per_page
+        in: query
+        type: integer
+        default: 10
+        description: Items per page
+      - name: facility_type
+        in: query
+        type: string
+        description: Filter by facility type
+      - name: active_only
+        in: query
+        type: boolean
+        default: true
+        description: Show only active centers
+    responses:
+      200:
+        description: Centers fetched successfully
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+            data:
+              type: array
+              items:
+                type: object
+            pagination:
+              type: object
+      500:
+        description: Server error
+    """
     try:
         facility_type = request.args.get('facility_type')
         waste_type = request.args.get('waste_type')
@@ -19,7 +62,9 @@ def get_centers():
         if active_only:
             query = query.filter_by(is_active=True)
         
-        centers = query.all()
+        # Apply pagination
+        query = query.order_by(RecyclingCenter.name)
+        paginated_result = paginate_query(query, default_per_page=10)
         
         return jsonify({
             'message': 'Centers fetched successfully',
@@ -34,7 +79,8 @@ def get_centers():
                 'operating_hours': center.operating_hours or 'Mon-Fri: 8AM-5PM',
                 'accepted_types': center.accepted_types.split(',') if center.accepted_types else [],
                 'is_active': center.is_active if hasattr(center, 'is_active') else True
-            } for center in centers]
+            } for center in paginated_result['items']],
+            'pagination': paginated_result['pagination']
         }), 200
         
     except Exception as e:

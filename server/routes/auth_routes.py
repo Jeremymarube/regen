@@ -1,4 +1,5 @@
 from flask import Blueprint, request, jsonify, current_app
+from flasgger import swag_from
 from models import User, db
 from jwt_handler import generate_token, decode_token
 import uuid
@@ -7,6 +8,50 @@ auth_bp = Blueprint('auth', __name__, url_prefix='/api/auth')
 # routes for user registration accessible via POST request to /api/auth/register
 @auth_bp.route('/register', methods=['POST'])
 def register():
+    """
+    User Registration
+    ---
+    tags:
+      - Authentication
+    parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          type: object
+          required:
+            - email
+            - password
+          properties:
+            email:
+              type: string
+              example: user@example.com
+            password:
+              type: string
+              example: securepassword123
+            name:
+              type: string
+              example: John Doe
+            location:
+              type: string
+              example: Nairobi
+    responses:
+      201:
+        description: User created successfully
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+            access_token:
+              type: string
+            user:
+              type: object
+      400:
+        description: Bad request - missing fields or user exists
+      500:
+        description: Server error
+    """
     try:
         data = request.get_json() # get JSON data email,password,name,location from the request body
         
@@ -41,6 +86,46 @@ def register():
 
 @auth_bp.route('/login', methods=['POST']) # route for user login acccessible via post request to /api/auth/login
 def login():
+    """
+    User Login
+    ---
+    tags:
+      - Authentication
+    parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          type: object
+          required:
+            - email
+            - password
+          properties:
+            email:
+              type: string
+              example: user@example.com
+            password:
+              type: string
+              example: securepassword123
+    responses:
+      200:
+        description: Login successful
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+            access_token:
+              type: string
+            user:
+              type: object
+      400:
+        description: Missing email or password
+      401:
+        description: Invalid credentials
+      500:
+        description: Server error
+    """
     try:
         data = request.get_json()
         

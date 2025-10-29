@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from models import WasteLog, db
 from jwt_handler import decode_token
+from utils.pagination import paginate_query
 import uuid
 from datetime import datetime
 
@@ -8,6 +9,59 @@ waste_bp = Blueprint('waste', __name__, url_prefix='/api/waste-logs') # define a
 
 @waste_bp.route('/', methods=['POST']) # routes to create a new waste log entry 
 def create_waste_log():
+    """
+    Create Waste Log
+    ---
+    tags:
+      - Waste Management
+    security:
+      - Bearer: []
+    parameters:
+      - name: Authorization
+        in: header
+        type: string
+        required: true
+        description: Bearer token
+      - name: body
+        in: body
+        required: true
+        schema:
+          type: object
+          required:
+            - waste_type
+            - weight
+          properties:
+            waste_type:
+              type: string
+              example: plastic
+            weight:
+              type: number
+              example: 5.5
+            co2_saved:
+              type: number
+              example: 2.75
+            disposal_method:
+              type: string
+              example: recycling
+            collection_location:
+              type: string
+              example: Nairobi
+            collection_status:
+              type: string
+              example: pending
+            image_url:
+              type: string
+              example: https://example.com/image.jpg
+    responses:
+      201:
+        description: Waste log created successfully
+      400:
+        description: Missing required fields
+      401:
+        description: Unauthorized
+      500:
+        description: Server error
+    """
     try:
         token = request.headers.get('Authorization', '').replace('Bearer ', '')
         user_id = decode_token(token)
@@ -97,8 +151,57 @@ def get_waste_logs():
 
 @waste_bp.route('/all', methods=['GET'])
 def get_all_waste_logs():
+    """
+    Get All Waste Logs (Paginated)
+    ---
+    tags:
+      - Waste Management
+    parameters:
+      - name: page
+        in: query
+        type: integer
+        default: 1
+        description: Page number
+      - name: per_page
+        in: query
+        type: integer
+        default: 10
+        description: Items per page
+    responses:
+      200:
+        description: Waste logs fetched successfully
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+            data:
+              type: array
+              items:
+                type: object
+            pagination:
+              type: object
+              properties:
+                page:
+                  type: integer
+                per_page:
+                  type: integer
+                total_items:
+                  type: integer
+                total_pages:
+                  type: integer
+                has_next:
+                  type: boolean
+                has_prev:
+                  type: boolean
+      500:
+        description: Server error
+    """
     try:
-        waste_logs = WasteLog.query.all()
+        # Apply pagination to query
+        query = WasteLog.query.order_by(WasteLog.date.desc())
+        paginated_result = paginate_query(query, default_per_page=10)
+        
         return jsonify({
             'message': 'All waste logs fetched successfully',
             'data': [{
@@ -112,7 +215,8 @@ def get_all_waste_logs():
                 'collection_date': log.collection_date.isoformat() if log.collection_date else None,
                 'disposal_method': log.disposal_method,
                 'image_url': log.image_url
-            } for log in waste_logs]
+            } for log in paginated_result['items']],
+            'pagination': paginated_result['pagination']
         }), 200
         
     except Exception as e:

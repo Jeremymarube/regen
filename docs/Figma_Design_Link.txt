@@ -1,0 +1,84 @@
+# ReGen - Figma Design Links
+
+## UI/UX Design Files
+
+### Main Design File
+**Status:** To be added by project owner
+
+**Instructions:**
+1. Create or locate your Figma design file
+2. Click "Share" in Figma
+3. Set permissions to "Anyone with the link can view"
+4. Copy the link and paste below
+
+**Figma Link:** [Add your Figma link here]
+
+---
+
+## Design Components
+
+### Pages/Screens Designed:
+- [ ] Landing Page
+- [ ] Login/Register Page
+- [ ] Dashboard
+- [ ] Waste Log Entry Form
+- [ ] AI Guide Chat Interface
+- [ ] Community Leaderboard
+- [ ] Recycling Centers Map
+- [ ] User Profile
+- [ ] Waste Management Page
+
+### Design System:
+- **Color Palette:** Green (#10B981), Gray (#F9F9F9), White
+- **Typography:** System fonts, modern sans-serif
+- **Components:** Buttons, Forms, Cards, Navigation
+- **Icons:** Lucide React icons
+
+---
+
+## Current Implementation
+
+The frontend is already built using:
+- **Framework:** Next.js 15 + React 19
+- **Styling:** TailwindCSS 4
+- **Components:** Custom components in `/client/src/components/`
+- **UI Library:** Lucide icons
+
+### Key UI Features Implemented:
+✅ Responsive sidebar navigation
+✅ Dashboard with statistics cards
+✅ Waste log forms with validation
+✅ AI chatbot interface
+✅ Community leaderboard table
+✅ Recycling centers map integration
+✅ Protected routes with loading states
+✅ Modern, clean design aesthetic
+
+---
+
+## Screenshots
+
+If you don't have Figma designs, you can document the current UI with screenshots:
+
+```bash
+# Take screenshots of key pages:
+1. Dashboard - /dashboard
+2. Waste Log - /dashboard/log
+3. AI Guide - /dashboard/guide
+4. Community - /dashboard/community
+5. Manage Waste - /dashboard/manage-waste
+6. Recycling Centers - /dashboard/manage-centers
+```
+
+---
+
+## Design Resources
+
+- **TailwindCSS Docs:** https://tailwindcss.com/docs
+- **Lucide Icons:** https://lucide.dev/icons
+- **Next.js UI Patterns:** https://nextjs.org/docs
+
+---
+
+**Last Updated:** October 29, 2025
+**Status:** Awaiting Figma link from project owner

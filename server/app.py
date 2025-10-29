@@ -3,6 +3,7 @@ import os
 from flask import Flask, jsonify
 from flask_cors import CORS
 from flask_bcrypt import Bcrypt
+from flasgger import Swagger
 from config import config
 from database import init_db
 
@@ -26,6 +27,48 @@ def create_app():
     # Initialize extensions
     init_db(app)
     bcrypt = Bcrypt(app)
+    
+    # Initialize Swagger
+    swagger_config = {
+        "headers": [],
+        "specs": [
+            {
+                "endpoint": 'apispec',
+                "route": '/apispec.json',
+                "rule_filter": lambda rule: True,
+                "model_filter": lambda tag: True,
+            }
+        ],
+        "static_url_path": "/flasgger_static",
+        "swagger_ui": True,
+        "specs_route": "/api/docs/"
+    }
+    
+    swagger_template = {
+        "swagger": "2.0",
+        "info": {
+            "title": "ReGen API Documentation",
+            "description": "AI-powered waste and sustainability management platform API",
+            "version": "1.0.0",
+            "contact": {
+                "name": "ReGen Team",
+                "email": "support@regen.com"
+            }
+        },
+        "host": os.environ.get("API_HOST", "localhost:5000"),
+        "basePath": "/",
+        "schemes": ["http", "https"],
+        "securityDefinitions": {
+            "Bearer": {
+                "type": "apiKey",
+                "name": "Authorization",
+                "in": "header",
+                "description": "JWT Authorization header using the Bearer scheme. Example: 'Bearer {token}'"
+            }
+        }
+    }
+    
+    Swagger(app, config=swagger_config, template=swagger_template)
     
     # CORS configuration
     # Get allowed origins from environment variable or use defaults
