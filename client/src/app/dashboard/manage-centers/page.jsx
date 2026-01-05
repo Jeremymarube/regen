@@ -133,8 +133,8 @@ function CenterCard({ center, onEdit, onDelete, onConfirmDelete, onCancelDelete,
             }`} />
           </div>
           <div>
-            <h3 className="font-bold text-[25px] text-gray-900">{center.name}</h3>
-            <span className={`text-[20px] font-regular px-2 py-1 rounded-[10px] ${
+            <h3 className="font-bold text-lg lg:text-xl xl:text-2xl text-gray-900">{center.name}</h3>
+            <span className={`text-sm lg:text-base font-regular px-2 py-1 rounded-[10px] ${
               center.facility_type === 'biogas' ? 'bg-green-100 text-green-700' :
               center.facility_type === 'dumpsite' ? 'bg-orange-100 text-orange-700' :
               'bg-blue-100 text-blue-700'
@@ -145,13 +145,13 @@ function CenterCard({ center, onEdit, onDelete, onConfirmDelete, onCancelDelete,
         </div>
       </div>
 
-      <div className="space-y-2 mb-4 text-[24px] font-regular text-black-600">
+      <div className="space-y-2 mb-4 text-lg lg:text-xl font-regular text-gray-600">
         <p>{center.location}</p>
         <p>{center.operating_hours}</p>
         <p>{center.contact}</p>
         <div className="flex flex-wrap gap-1">
           {center.accepted_types.map((type) => (
-            <span key={type} className="text-[20px] bg-[#E0E0E0]  text-black-700 px-2 py-1 rounded-[10px]">
+            <span key={type} className="text-sm lg:text-base bg-[#E0E0E0] text-gray-700 px-2 py-1 rounded-[10px]">
               {type}
             </span>
           ))}
@@ -180,16 +180,16 @@ function CenterCard({ center, onEdit, onDelete, onConfirmDelete, onCancelDelete,
           <>
             <button
               onClick={onEdit}
-              className="flex-1 bg-[#008236] text-white text-[24px] py-2 rounded-lg hover:opacity-90 transition flex items-center justify-center space-x-4"
+              className="flex-1 bg-[#008236] text-white text-sm lg:text-base py-2 rounded-lg hover:opacity-90 transition flex items-center justify-center space-x-2 lg:space-x-4"
             >
-              <Edit2 className="w-6 h-6" />
+              <Edit2 className="w-4 h-4 lg:w-6 lg:h-6" />
               <span>Edit</span>
             </button>
             <button
               onClick={onDelete}
-              className="flex-1 bg-red-600 text-white text-[24px] py-2 rounded-lg hover:bg-red-700 transition flex items-center justify-center space-x-4"
+              className="flex-1 bg-red-600 text-white text-sm lg:text-base py-2 rounded-lg hover:bg-red-700 transition flex items-center justify-center space-x-2 lg:space-x-4"
             >
-              <Trash2 className="w-6 h-6" />
+              <Trash2 className="w-4 h-4 lg:w-6 lg:h-6" />
               <span>Delete</span>
             </button>
           </>
@@ -306,7 +306,7 @@ function CenterFormModal({ center, onClose, onSave }) {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-[16px] font-semibold text-black-700 mb-2">Name *</label>
+            <label className="block text-sm lg:text-base font-semibold text-gray-700 mb-2">Name *</label>
             <input
               type="text"
               required
@@ -318,7 +318,7 @@ function CenterFormModal({ center, onClose, onSave }) {
 
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-[16px] font-semibold text-black-700 mb-2">Facility Type *</label>
+              <label className="block text-sm lg:text-base font-semibold text-gray-700 mb-2">Facility Type *</label>
               <select
                 required
                 value={formData.facility_type}
@@ -332,7 +332,7 @@ function CenterFormModal({ center, onClose, onSave }) {
             </div>
 
             <div>
-              <label className="block text-[16px] font-semibold text-black-700 mb-2">Status</label>
+              <label className="block text-sm lg:text-base font-semibold text-gray-700 mb-2">Status</label>
               <select
                 value={formData.is_active ? 'active' : 'inactive'}
                 onChange={(e) => setFormData({ ...formData, is_active: e.target.value === 'active' })}
@@ -345,7 +345,7 @@ function CenterFormModal({ center, onClose, onSave }) {
           </div>
 
           <div>
-            <label className="block text-[16px] font-semibold text-black-700 mb-2">Location *</label>
+            <label className="block text-sm lg:text-base font-semibold text-gray-700 mb-2">Location *</label>
             <input
               type="text"
               required
@@ -357,7 +357,7 @@ function CenterFormModal({ center, onClose, onSave }) {
 
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-[16px] font-semibold text-black-700 mb-2">Latitude</label>
+              <label className="block text-sm lg:text-base font-semibold text-gray-700 mb-2">Latitude</label>
               <input
                 type="number"
                 step="0.000001"
@@ -368,7 +368,7 @@ function CenterFormModal({ center, onClose, onSave }) {
             </div>
 
             <div>
-              <label className="block text-[16px] font-semibold text-black-700 mb-2">Longitude</label>
+              <label className="block text-sm lg:text-base font-semibold text-gray-700 mb-2">Longitude</label>
               <input
                 type="number"
                 step="0.000001"
@@ -380,7 +380,7 @@ function CenterFormModal({ center, onClose, onSave }) {
           </div>
 
           <div>
-            <label className="block text-[16px] font-semibold text-black-700 mb-2">Contact</label>
+            <label className="block text-sm lg:text-base font-semibold text-gray-700 mb-2">Contact</label>
             <input
               type="text"
               value={formData.contact}
@@ -390,7 +390,7 @@ function CenterFormModal({ center, onClose, onSave }) {
           </div>
 
           <div>
-            <label className="block text-[16px] font-semibold text-black-700 mb-2">Operating Hours</label>
+            <label className="block text-sm lg:text-base font-semibold text-gray-700 mb-2">Operating Hours</label>
             <input
               type="text"
               value={formData.operating_hours}
@@ -400,7 +400,7 @@ function CenterFormModal({ center, onClose, onSave }) {
           </div>
 
           <div>
-            <label className="block text-[16px] font-semibold text-black-700 mb-2">Accepted Waste Types</label>
+            <label className="block text-sm lg:text-base font-semibold text-gray-700 mb-2">Accepted Waste Types</label>
             <div className="flex space-x-2 mb-3">
               <select
                 value={selectedType}
