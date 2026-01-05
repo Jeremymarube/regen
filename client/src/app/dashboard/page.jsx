@@ -53,16 +53,16 @@ function DashboardContent() {
 
           {/* Welcome Message */}
           <div className="mb-8">
-            <h1 className="text-[55px] font-bold text-gray-900">
+            <h1 className="text-3xl lg:text-5xl font-bold text-gray-900">
               Welcome back, {profile?.name}!
             </h1>
-            <p className="text-gray-600 mt-2 font-regular text-[24px]">
+            <p className="text-gray-600 mt-2 font-regular text-lg lg:text-2xl">
               Track your environmental impact and sustainability progress
             </p>
           </div>
 
           {/* Stats Section */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-[10px] mb-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
             <StatCard
               icon={<Leaf className="w-6 h-6 text-green-600" />}
               label="CO₂ Saved"
@@ -86,10 +86,10 @@ function DashboardContent() {
           </div>
 
           {/* Activity + Impact Section */}
-          <div className="grid lg:grid-cols-2 gap-[127px]">
+          <div className="grid lg:grid-cols-2 gap-8">
             {/* Recent Activity */}
-            <div className="bg-white rounded-lg border border-[#D9D9D9] w-[500px] h-[494px] p-6">
-              <h2 className="text-[30px] font-bold text-gray-900 mb-4">
+            <div className="bg-white rounded-lg border border-[#D9D9D9] p-6 min-h-[400px]">
+              <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4">
                 Recent Activity
               </h2>
               {wasteLogs.length === 0 ? (
@@ -98,6 +98,44 @@ function DashboardContent() {
                   <p className="text-gray-500">No waste logs yet</p>
                   <p className="text-gray-400 text-sm mt-2">
                     Start logging your waste to see your impact
+                  </p>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {wasteLogs.slice(0, 5).map((log) => (
+                    <WasteLogItem key={log.id} log={log} />
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Environmental Impact */}
+            <div className="bg-white rounded-lg border border-[#D9D9D9] p-6 min-h-[400px]">
+              <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4">
+                Environmental Impact
+              </h2>
+              <div className="space-y-6">
+                <ImpactItem
+                  label="Trees Equivalent"
+                  value={((stats.total_co2_saved || 0) / 20).toFixed(1)}
+                  description="trees planted"
+                />
+                <ImpactItem
+                  label="Energy Saved"
+                  value={((stats.total_waste_recycled || 0) * 0.5).toFixed(1)}
+                  description="kWh equivalent"
+                />
+                <ImpactItem
+                  label="Water Conserved"
+                  value={((stats.total_waste_recycled || 0) * 10).toFixed(0)}
+                  description="liters saved"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  );
                   </p>
                 </div>
               ) : (

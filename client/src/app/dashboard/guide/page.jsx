@@ -65,19 +65,19 @@ import { API_ENDPOINTS } from '@/utils/constants';
 
     
    return (
-       <div className="flex-1 min-h-screen bg-gray-50  px-2">
+       <div className="flex-1 min-h-screen bg-gray-50 py-8 px-4">
         <div className="max-w-7xl mx-auto"> 
         
           <div className="mb-8">
     
-            <h1 className="text-[55px] font-bold text-gray-900">AI Green Guide</h1>
-            <p className="text-gray-600 mt-2 font-regular text-[24px]">
+            <h1 className="text-3xl lg:text-5xl font-bold text-gray-900">AI Green Guide</h1>
+            <p className="text-gray-600 mt-2 font-regular text-lg lg:text-2xl">
               Ask me anything about waste management and sustainability
             </p>
           </div>
            
-                <div className="bg-white rounded-lg shadow-sm flex flex-col h-[500px] w-full max-w-5xl px-6">
-  <div className="flex-1 overflow-y-auto p-6 space-y-4">
+                <div className="bg-white rounded-lg shadow-sm flex flex-col h-[400px] lg:h-[500px] w-full max-w-5xl mx-auto">
+  <div className="flex-1 overflow-y-auto p-4 lg:p-6 space-y-4">
     {messages.map((message) => (
       <div
         key={message.id}
@@ -86,7 +86,7 @@ import { API_ENDPOINTS } from '@/utils/constants';
         }`}
       >
                   <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 max-w-[80%] ${
+                    className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
                       message.role === 'user' ? 'bg-green-600' : 'bg-gray-200'
                     }`}
                   >
@@ -97,7 +97,7 @@ import { API_ENDPOINTS } from '@/utils/constants';
                     )}
                   </div>
                   <div
-              className={`inline-block max-w-[200%] px-4 py-3 rounded-lg whitespace-pre-line text-[24px] font-regular leading-relaxed ${
+              className={`inline-block px-4 py-3 rounded-lg whitespace-pre-line text-sm lg:text-xl font-regular leading-relaxed ${
               message.role === 'user'
             ? 'bg-green-600 text-white'
            : 'bg-gray-100 text-gray-900'
@@ -135,47 +135,47 @@ import { API_ENDPOINTS } from '@/utils/constants';
       onChange={(e) => setInput(e.target.value)}
       onKeyPress={(e) => e.key === 'Enter' && handleSend()}
       placeholder="Ask about waste disposal, recycling, biogas..."
-      className="w-full px-4 py-2.5 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition text-[24px] font-regular"
+      className="w-full px-4 py-2.5 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition text-base lg:text-xl font-regular"
     />
     <button
       onClick={handleSend}
       disabled={loading || !input.trim()}
       className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white text-[#14AE5C] p-2 rounded-lg hover:bg-gray-100 transition disabled:opacity-50"
     >
-      <Send className="w-6 h-6" />
+      <Send className="w-5 h-5 lg:w-6 lg:h-6" />
     </button>
   
 
               </div>
             </div>
           </div>
-          <div className="mt-10 grid gap-4 md:grid-cols-3">
+          <div className="mt-10 grid gap-4 grid-cols-1 md:grid-cols-3">
             <Card className="bg-gradient-card border-border hover:shadow-md transition-smooth ">
               <CardHeader>
-                <CardTitle className="text-[24px] font-semibold ">Quick Tip</CardTitle>
+                <CardTitle className="text-lg lg:text-xl font-semibold ">Quick Tip</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-[23px] text-muted-foreground font-regular">
+                <p className="text-sm lg:text-lg text-muted-foreground font-regular">
                   Rinse containers before recycling to prevent contamination.
                 </p>
               </CardContent>
             </Card>
              <Card className="bg-gradient-card border-border hover:shadow-md transition-smooth">
               <CardHeader>
-                <CardTitle className="text-[24px] font-semibold">Did You Know?</CardTitle>
+                <CardTitle className="text-lg lg:text-xl font-semibold">Did You Know?</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-[23px] text-muted-foreground font-regular">
+                <p className="text-sm lg:text-lg text-muted-foreground font-regular">
                   Composting can reduce waste by up to 30%.
                 </p>
               </CardContent>
             </Card>
              <Card className="bg-gradient-card border-border hover:shadow-md transition-smooth">
               <CardHeader>
-                <CardTitle className="text-[24px] font-semibold">Pro Tip</CardTitle>
+                <CardTitle className="text-lg lg:text-xl font-semibold">Pro Tip</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-[23px] text-muted-foreground font-regular">
+                <p className="text-sm lg:text-lg text-muted-foreground font-regular">
                   Use reusable bags and containers to minimize single-use plastics.
                 </p>
               </CardContent>

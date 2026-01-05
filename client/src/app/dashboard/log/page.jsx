@@ -58,8 +58,8 @@ function WasteLogContent() {
     <div className="min-h-screen bg-gray-50 py-8 px-4 ">
       <div className="max-w-7xl mx-auto ">
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-black-900">Log Your Waste</h1>
-          <p className="text-gray-600 text-regular text-[20px] mt-2">
+          <h1 className="text-3xl lg:text-4xl font-bold text-black-900">Log Your Waste</h1>
+          <p className="text-gray-600 text-regular text-lg lg:text-xl mt-2">
             Track your recycling efforts and schedule waste collection
           </p>
         </div>
@@ -77,14 +77,14 @@ function WasteLogContent() {
 
           {/* Sidebar - 1/3 width */}
           <div className="lg:col-span-1 ">
-            <div className="bg-white rounded-lg shadow-sm p-6 sticky top-24 text-[25px]">
+            <div className="bg-white rounded-lg shadow-sm p-6 sticky top-24 text-lg lg:text-xl">
               <h3 className="font-bold text-gray-900 mb-4 flex items-center">
                 <Building2 className="w-5 h-5 mr-2 text-green-600" />
                 Nearby Facilities
               </h3>
 
               {!region || !wasteType ? (
-                <p className="text-regular text-[17px] text-[#757575]">
+                <p className="text-regular text-sm lg:text-base text-[#757575]">
                   Select a region and waste type to see nearby facilities
                 </p>
               ) : loading ? (
@@ -92,7 +92,7 @@ function WasteLogContent() {
                   <div className="animate-spin rounded-full h-8 w-8 border-4 border-green-600 border-t-transparent"></div>
                 </div>
               ) : nearbyFacilities.length === 0 ? (
-                <p className="text-regular text-[17px] text-[#757575]">
+                <p className="text-regular text-sm lg:text-base text-[#757575]">
                   No facilities found in {region}. Try selecting a different region.
                 </p>
               ) : (

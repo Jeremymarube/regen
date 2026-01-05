@@ -53,22 +53,21 @@ function ManageCentersContent() {
   console.log('Rendering with centers:', centers);
   
   return (
-    
-    
-        <div className="max-w-7xl mx-auto">
-          <div className="flex justify-between items-center mb-8">
-            <div>
-              <h1 className="text-[55px] font-bold text-black-900">Manage Recycling Centers</h1>
-              <p className="text-black-600 mt-2 font-regular text-[24px]">Add, edit, and remove waste facilities</p>
-            </div>
-            <button
-              onClick={() => setShowAddForm(true)}
-              className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition flex items-center space-x-2 font-regular text-[24px]"
-            >
-              <Plus className="w-5 h-5" />
-              <span>Add Center</span>
-            </button>
+    <div className="flex-1 min-h-screen bg-gray-50 py-8 px-4">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
+          <div>
+            <h1 className="text-3xl lg:text-5xl font-bold text-gray-900">Manage Recycling Centers</h1>
+            <p className="text-gray-600 mt-2 font-regular text-lg lg:text-2xl">Add, edit, and remove waste facilities</p>
           </div>
+          <button
+            onClick={() => setShowAddForm(true)}
+            className="bg-green-600 text-white px-4 lg:px-6 py-3 rounded-lg hover:bg-green-700 transition flex items-center space-x-2 font-regular text-base lg:text-xl w-full sm:w-auto justify-center"
+          >
+            <Plus className="w-5 h-5" />
+            <span>Add Center</span>
+          </button>
+        </div>
 
           {centers.length === 0 ? (
             <div className="bg-white rounded-lg shadow-sm p-12 text-center">
@@ -84,7 +83,7 @@ function ManageCentersContent() {
               </button>
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {centers.map((center) => (
                 <CenterCard
                   key={center.id}

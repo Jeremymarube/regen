@@ -195,7 +195,7 @@ export default function WasteForm({ onSuccess, onDataChange, selectedFacility, o
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm p-15 w-200 h-180 border border-[#D9D9D9]">
+    <div className="bg-white rounded-lg shadow-sm p-6 lg:p-8 border border-[#D9D9D9]">
       {error && (
         <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg flex items-start">
           <span className="text-sm ">{error}</span>
@@ -209,9 +209,9 @@ export default function WasteForm({ onSuccess, onDataChange, selectedFacility, o
       )}
 
       <form onSubmit={handleSubmit} className="space-y-6 ">
-        <div className=" grid md:grid-cols-2 gap-6 ">
+        <div className=" grid grid-cols-1 md:grid-cols-2 gap-6 ">
           <div>
-            <label htmlFor="wasteType" className="block font-semibold text-[20px] text-gray-700 mb-2">
+            <label htmlFor="wasteType" className="block font-semibold text-lg lg:text-xl text-gray-700 mb-2">
               Waste Type <span className="text-black-500">*</span>
             </label>
             <select
@@ -231,7 +231,7 @@ export default function WasteForm({ onSuccess, onDataChange, selectedFacility, o
           </div>
 
           <div>
-            <label htmlFor="weight" className="block font-semibold text-[20px] text-gray-700 mb-2">
+            <label htmlFor="weight" className="block font-semibold text-lg lg:text-xl text-gray-700 mb-2">
               Weight (kg) <span className="text-black-500">*</span>
             </label>
             <input
@@ -248,9 +248,9 @@ export default function WasteForm({ onSuccess, onDataChange, selectedFacility, o
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label htmlFor="region" className="block font-semibold text-[20px] text-gray-700 mb-2">
+            <label htmlFor="region" className="block font-semibold text-lg lg:text-xl text-gray-700 mb-2">
               Region <span className="text-black-500">*</span>
             </label>
             <div className="relative">
@@ -273,7 +273,7 @@ export default function WasteForm({ onSuccess, onDataChange, selectedFacility, o
           </div>
 
           <div>
-            <label htmlFor="collectionLocation" className="block font-semibold text-[20px] text-gray-700 mb-2">
+            <label htmlFor="collectionLocation" className="block font-semibold text-lg lg:text-xl text-gray-700 mb-2">
               Collection Address <span className="text-black-500">*</span>
             </label>
             <input
@@ -289,7 +289,7 @@ export default function WasteForm({ onSuccess, onDataChange, selectedFacility, o
         </div>
 
         <div>
-          <label htmlFor="collectionDate" className="block font-semibold text-[20px] text-gray-700 mb-2">
+          <label htmlFor="collectionDate" className="block font-semibold text-lg lg:text-xl text-gray-700 mb-2">
             Preferred Collection Date (Optional)
           </label>
           <div className="relative">
@@ -318,7 +318,7 @@ export default function WasteForm({ onSuccess, onDataChange, selectedFacility, o
         )}
 
         <div>
-          <label htmlFor="imageUrl" className="block font-semibold text-[20px] text-gray-700 mb-2">
+          <label htmlFor="imageUrl" className="block font-semibold text-lg lg:text-xl text-gray-700 mb-2">
             Image URL (Optional)
           </label>
           <div className="space-y-2">
@@ -372,7 +372,7 @@ export default function WasteForm({ onSuccess, onDataChange, selectedFacility, o
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-green-600 text-[20px]font-semibold text-white py-3 rounded-lg font-medium hover:bg-green-700 transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+          className="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
         >
           {loading ? (
             <>
