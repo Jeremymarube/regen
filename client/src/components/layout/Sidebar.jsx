@@ -29,7 +29,7 @@ export default function Sidebar({ onClose }) {
   };
 
   return (
-    <aside className="w-full h-screen bg-[#F9F9F9] border-r border-gray-200 flex flex-col justify-between shadow-sm font-medium lg:w-[180px]">
+    <aside className="flex h-full w-full flex-col justify-between overflow-y-auto border-r border-gray-200 bg-[#F9F9F9] font-medium shadow-sm lg:w-[180px]">
       {/* Header with close button for mobile */}
       <div className="lg:hidden p-4 border-b border-gray-100 flex items-center justify-between">
         <span className="font-semibold text-gray-900">Menu</span>
@@ -51,7 +51,7 @@ export default function Sidebar({ onClose }) {
       </div>
 
       {/* Nav Links */}
-      <nav className="flex-1 mt-8 space-y-2 px-3">
+      <nav className="mt-6 flex-1 space-y-2 px-3 pb-4">
         {navItems.map((item) => (
           <Link
             key={item.path}
@@ -96,6 +96,5 @@ export default function Sidebar({ onClose }) {
     </aside>
   );
 }
-
 
 

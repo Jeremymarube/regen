@@ -25,7 +25,7 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
                   href="/auth/register"
-                className="flex items-center justify-center rounded-lg transition text-sm lg:text-lg font-medium px-4 py-3 lg:px-6 lg:py-3"
+                className="flex w-full items-center justify-center rounded-lg px-4 py-3 text-sm font-medium transition sm:w-auto lg:px-6 lg:py-3 lg:text-lg"
              style={{
                backgroundColor: '#008236',
                color: '#ffffff',
@@ -35,17 +35,14 @@ export default function Home() {
                 >
                     <span>Get Started</span>
                   <ArrowRight className="w-4 h-4 lg:w-5 lg:h-5 ml-2" />
-                </Link>
+               </Link>
                <Link
   href="/auth/login"
-  className="flex items-center justify-center rounded-lg border-2 border-[#008236] text-[#008236] font-medium hover:bg-green-50 transition text-sm lg:text-lg px-4 py-3 lg:px-6 lg:py-3"
+  className="flex w-full items-center justify-center rounded-lg border-2 border-[#008236] px-4 py-3 text-sm font-medium text-[#008236] transition hover:bg-green-50 sm:w-auto sm:text-base lg:px-6 lg:py-3 lg:text-lg"
   style={{
-    width: '81px',             // button width
-    height: '40px',            // button height
     fontFamily: 'Rasa, serif', // Figma font
     fontWeight: 500,           // medium
-    fontSize: '20px',          // font size
-    lineHeight: '24px',        // vertical alignment
+    minWidth: '120px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -56,12 +53,12 @@ export default function Home() {
 
                  </div>
             </div>
-            <div className="relative">
+            <div className="relative mx-auto w-full max-w-md lg:mx-0 lg:max-w-none">
   <div className="rounded-2xl overflow-hidden shadow-md">
     <img
       src="/images/regen-hero.jpeg"
       alt="Waste management illustration"
-      className="w-full max-w-md lg:max-w-lg xl:max-w-xl h-auto object-cover"
+      className="h-auto w-full object-cover lg:max-w-lg xl:max-w-xl"
     />
   </div>
 </div>
@@ -110,7 +107,7 @@ export default function Home() {
           </p>
           <Link
             href="/auth/register"
-            className="bg-white text-green-600 px-6 lg:px-8 py-3 rounded-lg font-medium hover:bg-gray-100 transition inline-flex items-center space-x-2 text-lg lg:text-xl"
+            className="inline-flex w-full items-center justify-center space-x-2 rounded-lg bg-white px-6 py-3 text-lg font-medium text-green-600 transition hover:bg-gray-100 sm:w-auto lg:px-8 lg:text-xl"
           >
             <span>Start Your Journey</span>
             <ArrowRight className="w-5 h-5" />
@@ -155,4 +152,3 @@ function ImpactCard({ number, label }) {
     </div>
   );
 }
-

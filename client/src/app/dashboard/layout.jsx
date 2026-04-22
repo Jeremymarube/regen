@@ -8,7 +8,7 @@ export default function DashboardLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="flex min-h-screen bg-[#F9FAFB]">
+    <div className="flex min-h-screen overflow-x-hidden bg-[#F9FAFB]">
       {/* Mobile sidebar overlay */}
       {sidebarOpen && (
         <div
@@ -18,7 +18,7 @@ export default function DashboardLayout({ children }) {
       )}
 
       {/* Sidebar */}
-      <div className={`fixed inset-y-0 left-0 z-50 w-[280px] transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 ${
+      <div className={`fixed inset-y-0 left-0 z-50 w-[85vw] max-w-[280px] transform transition-transform duration-300 ease-in-out lg:static lg:inset-0 lg:w-[280px] lg:max-w-none lg:translate-x-0 ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
       }`}>
         <Sidebar onClose={() => setSidebarOpen(false)} />
@@ -43,11 +43,10 @@ export default function DashboardLayout({ children }) {
       </div>
 
       {/* Main content */}
-      <main className="flex-1 lg:ml-0 px-4 lg:px-8 py-8 lg:py-8 pt-20 lg:pt-8">
+      <main className="min-w-0 flex-1 px-4 py-8 pt-20 lg:ml-0 lg:px-8 lg:pt-8">
         <div className="max-w-7xl mx-auto w-full">{children}</div>
       </main>
     </div>
   );
 }
-
 

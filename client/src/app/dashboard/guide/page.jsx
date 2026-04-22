@@ -71,12 +71,12 @@ import { API_ENDPOINTS } from '@/utils/constants';
           <div className="mb-8">
     
             <h1 className="text-3xl lg:text-5xl font-bold text-gray-900">AI Green Guide</h1>
-            <p className="text-gray-600 mt-2 font-regular text-lg lg:text-2xl">
+            <p className="text-gray-600 mt-2 font-normal text-lg lg:text-2xl">
               Ask me anything about waste management and sustainability
             </p>
           </div>
            
-                <div className="bg-white rounded-lg shadow-sm flex flex-col h-[400px] lg:h-[500px] w-full max-w-5xl mx-auto">
+                <div className="mx-auto flex h-[65vh] min-h-[420px] w-full max-w-5xl flex-col rounded-lg bg-white shadow-sm lg:h-[500px]">
   <div className="flex-1 overflow-y-auto p-4 lg:p-6 space-y-4">
     {messages.map((message) => (
       <div
@@ -97,7 +97,7 @@ import { API_ENDPOINTS } from '@/utils/constants';
                     )}
                   </div>
                   <div
-              className={`inline-block px-4 py-3 rounded-lg whitespace-pre-line text-sm lg:text-xl font-regular leading-relaxed ${
+              className={`inline-block max-w-[calc(100%-3rem)] break-words rounded-lg px-4 py-3 whitespace-pre-line text-sm font-normal leading-relaxed sm:max-w-[80%] lg:text-xl ${
               message.role === 'user'
             ? 'bg-green-600 text-white'
            : 'bg-gray-100 text-gray-900'
@@ -135,7 +135,7 @@ import { API_ENDPOINTS } from '@/utils/constants';
       onChange={(e) => setInput(e.target.value)}
       onKeyPress={(e) => e.key === 'Enter' && handleSend()}
       placeholder="Ask about waste disposal, recycling, biogas..."
-      className="w-full px-4 py-2.5 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition text-base lg:text-xl font-regular"
+      className="w-full px-4 py-2.5 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition text-base lg:text-xl font-normal"
     />
     <button
       onClick={handleSend}
@@ -155,7 +155,7 @@ import { API_ENDPOINTS } from '@/utils/constants';
                 <CardTitle className="text-lg lg:text-xl font-semibold ">Quick Tip</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm lg:text-lg text-muted-foreground font-regular">
+                <p className="text-sm lg:text-lg text-muted-foreground font-normal">
                   Rinse containers before recycling to prevent contamination.
                 </p>
               </CardContent>
@@ -165,7 +165,7 @@ import { API_ENDPOINTS } from '@/utils/constants';
                 <CardTitle className="text-lg lg:text-xl font-semibold">Did You Know?</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm lg:text-lg text-muted-foreground font-regular">
+                <p className="text-sm lg:text-lg text-muted-foreground font-normal">
                   Composting can reduce waste by up to 30%.
                 </p>
               </CardContent>
@@ -175,7 +175,7 @@ import { API_ENDPOINTS } from '@/utils/constants';
                 <CardTitle className="text-lg lg:text-xl font-semibold">Pro Tip</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm lg:text-lg text-muted-foreground font-regular">
+                <p className="text-sm lg:text-lg text-muted-foreground font-normal">
                   Use reusable bags and containers to minimize single-use plastics.
                 </p>
               </CardContent>

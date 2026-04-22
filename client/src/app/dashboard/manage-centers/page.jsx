@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import ProtectedRoute from '@/components/auth/ProtectedRoute';
-import Sidebar from '@/components/layout/Sidebar';
 import centerService from '@/services/centerService';
 import { Plus, Edit2, Trash2, X, Check, Building2 } from 'lucide-react';
 
@@ -58,11 +57,11 @@ function ManageCentersContent() {
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
           <div>
             <h1 className="text-3xl lg:text-5xl font-bold text-gray-900">Manage Recycling Centers</h1>
-            <p className="text-gray-600 mt-2 font-regular text-lg lg:text-2xl">Add, edit, and remove waste facilities</p>
+            <p className="text-gray-600 mt-2 font-normal text-lg lg:text-2xl">Add, edit, and remove waste facilities</p>
           </div>
           <button
             onClick={() => setShowAddForm(true)}
-            className="bg-green-600 text-white px-4 lg:px-6 py-3 rounded-lg hover:bg-green-700 transition flex items-center space-x-2 font-regular text-base lg:text-xl w-full sm:w-auto justify-center"
+            className="bg-green-600 text-white px-4 lg:px-6 py-3 rounded-lg hover:bg-green-700 transition flex items-center space-x-2 font-normal text-base lg:text-xl w-full sm:w-auto justify-center"
           >
             <Plus className="w-5 h-5" />
             <span>Add Center</span>
@@ -113,6 +112,7 @@ function ManageCentersContent() {
             />
           )}
         </div>
+      </div>
   );
 }
 
@@ -134,7 +134,7 @@ function CenterCard({ center, onEdit, onDelete, onConfirmDelete, onCancelDelete,
           </div>
           <div>
             <h3 className="font-bold text-lg lg:text-xl xl:text-2xl text-gray-900">{center.name}</h3>
-            <span className={`text-sm lg:text-base font-regular px-2 py-1 rounded-[10px] ${
+            <span className={`text-sm lg:text-base font-normal px-2 py-1 rounded-[10px] ${
               center.facility_type === 'biogas' ? 'bg-green-100 text-green-700' :
               center.facility_type === 'dumpsite' ? 'bg-orange-100 text-orange-700' :
               'bg-blue-100 text-blue-700'
@@ -145,7 +145,7 @@ function CenterCard({ center, onEdit, onDelete, onConfirmDelete, onCancelDelete,
         </div>
       </div>
 
-      <div className="space-y-2 mb-4 text-lg lg:text-xl font-regular text-gray-600">
+      <div className="space-y-2 mb-4 text-lg lg:text-xl font-normal text-gray-600">
         <p>{center.location}</p>
         <p>{center.operating_hours}</p>
         <p>{center.contact}</p>
@@ -293,8 +293,8 @@ function CenterFormModal({ center, onClose, onSave }) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-lg max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-start justify-center bg-black bg-opacity-50 p-3 sm:items-center sm:p-4">
+      <div className="max-h-[calc(100vh-1.5rem)] w-full max-w-2xl overflow-y-auto rounded-lg bg-white p-6 sm:max-h-[90vh]">
         <div className="flex justify-between items-start mb-6">
           <h2 className="text-2xl font-bold text-gray-900">
             {center ? 'Edit' : 'Add'} Recycling Center
@@ -401,7 +401,7 @@ function CenterFormModal({ center, onClose, onSave }) {
 
           <div>
             <label className="block text-sm lg:text-base font-semibold text-gray-700 mb-2">Accepted Waste Types</label>
-            <div className="flex space-x-2 mb-3">
+            <div className="mb-3 flex flex-col gap-2 sm:flex-row">
               <select
                 value={selectedType}
                 onChange={(e) => setSelectedType(e.target.value)}
@@ -439,7 +439,7 @@ function CenterFormModal({ center, onClose, onSave }) {
             </div>
           </div>
 
-          <div className="flex space-x-4">
+          <div className="flex flex-col gap-3 sm:flex-row sm:space-x-4">
             <button
               type="submit"
               className="flex-1 bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition font-medium"

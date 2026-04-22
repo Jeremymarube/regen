@@ -212,7 +212,7 @@ export default function WasteForm({ onSuccess, onDataChange, selectedFacility, o
         <div className=" grid grid-cols-1 md:grid-cols-2 gap-6 ">
           <div>
             <label htmlFor="wasteType" className="block font-semibold text-lg lg:text-xl text-gray-700 mb-2">
-              Waste Type <span className="text-black-500">*</span>
+              Waste Type <span className="text-red-500">*</span>
             </label>
             <select
               id="wasteType"
@@ -232,7 +232,7 @@ export default function WasteForm({ onSuccess, onDataChange, selectedFacility, o
 
           <div>
             <label htmlFor="weight" className="block font-semibold text-lg lg:text-xl text-gray-700 mb-2">
-              Weight (kg) <span className="text-black-500">*</span>
+              Weight (kg) <span className="text-red-500">*</span>
             </label>
             <input
               id="weight"
@@ -251,7 +251,7 @@ export default function WasteForm({ onSuccess, onDataChange, selectedFacility, o
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label htmlFor="region" className="block font-semibold text-lg lg:text-xl text-gray-700 mb-2">
-              Region <span className="text-black-500">*</span>
+              Region <span className="text-red-500">*</span>
             </label>
             <div className="relative">
               <MapPin className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
@@ -274,7 +274,7 @@ export default function WasteForm({ onSuccess, onDataChange, selectedFacility, o
 
           <div>
             <label htmlFor="collectionLocation" className="block font-semibold text-lg lg:text-xl text-gray-700 mb-2">
-              Collection Address <span className="text-black-500">*</span>
+              Collection Address <span className="text-red-500">*</span>
             </label>
             <input
               id="collectionLocation"

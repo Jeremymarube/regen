@@ -67,7 +67,7 @@ export default function ManageWaste() {
         <div className="max-w-7xl mx-auto">
         <div className="mb-8">
           <h1 className="text-3xl lg:text-5xl font-bold text-gray-900">Manage Waste Logs</h1>
-          <p className="text-gray-600 font-regular text-lg lg:text-2xl mt-2">View, edit, and delete your waste entries</p>
+          <p className="text-gray-600 font-normal text-lg lg:text-2xl mt-2">View, edit, and delete your waste entries</p>
         </div>
 
         {wasteLogs.length === 0 ? (
@@ -92,7 +92,7 @@ export default function ManageWaste() {
                 <tbody className="divide-y divide-gray-200">
                   {(wasteLogs || []).map((log) => (
                     <tr key={log.id} className="hover:bg-gray-50 transition">
-                      <td className="px-4 lg:px-6 py-4 text-sm lg:text-xl font-regular text-gray-900">
+                      <td className="px-4 lg:px-6 py-4 text-sm lg:text-xl font-normal text-gray-900">
                         {new Date(log.date).toLocaleDateString()}
                       </td>
                       <td className="px-4 lg:px-6 py-4 text-sm lg:text-xl text-gray-900 capitalize">{log.waste_type}</td>
@@ -113,7 +113,7 @@ export default function ManageWaste() {
                           <option value="collected">Collected</option>
                         </select>
                       </td>
-                      <td className="px-4 lg:px-6 py-4 text-sm lg:text-xl font-regular text-green-600 hidden xl:table-cell">
+                      <td className="px-4 lg:px-6 py-4 text-sm lg:text-xl font-normal text-green-600 hidden xl:table-cell">
                         {log.co2_saved?.toFixed(2)} kg
                       </td>
                       <td className="px-4 lg:px-6 py-4">

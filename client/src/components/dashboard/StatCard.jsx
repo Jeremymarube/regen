@@ -15,7 +15,7 @@ export default function StatCard({ icon, label, value }) {
       <div className="text-2xl lg:text-4xl xl:text-5xl font-semibold text-gray-900">{value}</div>
 
       {/* Label */}
-      <div className="text-sm lg:text-lg xl:text-xl font-regular text-gray-600">{label}</div>
+      <div className="text-sm lg:text-lg xl:text-xl font-normal text-gray-600">{label}</div>
     </div>
   );
 }

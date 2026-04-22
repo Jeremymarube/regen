@@ -13,7 +13,7 @@
 export default function ImpactItem({ label, value, description }) {
   return (
     <div>
-      <div className="flex justify-between items-center mb-2">
+      <div className="mb-2 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
         <span className="text-gray-700 font-semibold text-sm lg:text-base">{label}</span>
         <span className="text-xl lg:text-2xl xl:text-3xl font-bold text-green-600">{value}</span>
       </div>

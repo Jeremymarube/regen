@@ -45,7 +45,7 @@ export default function Community() {
         <div className="max-w-6xl mx-auto">
         <div className="mb-8">
           <h1 className="text-3xl lg:text-5xl font-bold text-gray-900">Community Leaderboard</h1>
-          <p className="text-gray-600 text-lg lg:text-2xl font-regular mt-2">See how you rank among sustainability champions</p>
+          <p className="text-gray-600 text-lg lg:text-2xl font-normal mt-2">See how you rank among sustainability champions</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
@@ -101,7 +101,7 @@ function StatCard({ icon, label, value, bgColor }) {
         {icon}
       </div>
       <div className="text-3xl lg:text-5xl font-semibold text-gray-900 mb-1">{value}</div>
-      <div className="text-gray-600 font-regular text-lg lg:text-xl">{label}</div>
+      <div className="text-gray-600 font-normal text-lg lg:text-xl">{label}</div>
     </div>
   );
 }
@@ -118,19 +118,19 @@ function LeaderboardRow({ entry }) {
       </td>
       <td className="px-4 lg:px-6 py-4">
         <div className="font-semibold text-base lg:text-xl text-gray-900">{entry.name}</div>
-        <div className="text-sm lg:text-lg font-regular text-gray-500">{entry.location || 'Location not set'}</div>
+        <div className="text-sm lg:text-lg font-normal text-gray-500">{entry.location || 'Location not set'}</div>
       </td>
       <td className="px-4 lg:px-6 py-4">
         <div className="flex items-center space-x-2">
           <Award className="w-4 h-4 text-green-600" />
-          <span className="font-regular text-base lg:text-xl text-green-600">{entry.points.toLocaleString()}</span>
+          <span className="font-normal text-base lg:text-xl text-green-600">{entry.points.toLocaleString()}</span>
         </div>
       </td>
       <td className="px-4 lg:px-6 py-4 hidden md:table-cell">
-        <span className="text-gray-900 text-base lg:text-xl font-regular">{entry.total_co2_saved.toFixed(2)} kg</span>
+        <span className="text-gray-900 text-base lg:text-xl font-normal">{entry.total_co2_saved.toFixed(2)} kg</span>
       </td>
       <td className="px-4 lg:px-6 py-4 hidden lg:table-cell">
-        <span className="text-gray-900 text-base lg:text-xl font-regular">{entry.total_waste_recycled.toFixed(2)} kg</span>
+        <span className="text-gray-900 text-base lg:text-xl font-normal">{entry.total_waste_recycled.toFixed(2)} kg</span>
       </td>
     </tr>
   );

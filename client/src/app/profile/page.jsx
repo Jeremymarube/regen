@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import ProtectedRoute from '@/components/auth/ProtectedRoute';
-import Sidebar from '@/components/layout/Sidebar';
 import profileService from '@/services/profileService';
 import api from '@/services/api';
 import { User, MapPin, Save } from 'lucide-react';
@@ -67,7 +66,7 @@ function ProfileContent() {
       <div className="max-w-3xl mx-auto">
         <div className="mb-8">
           <h1 className="text-3xl lg:text-5xl font-bold text-gray-900">Profile Settings</h1>
-          <p className="text-gray-600 text-lg lg:text-2xl font-regular">Manage your account information</p>
+          <p className="text-gray-600 text-lg lg:text-2xl font-normal">Manage your account information</p>
         </div>
 
         <div className="bg-white rounded-lg shadow-sm p-6 lg:p-8">
@@ -77,28 +76,28 @@ function ProfileContent() {
             </div>
             <div className="text-center sm:text-left">
               <h2 className="text-xl lg:text-3xl font-bold text-gray-900">{profile?.name}</h2>
-              <p className="text-gray-500 text-base lg:text-xl font-regular">{user?.email}</p>
+              <p className="text-gray-500 text-base lg:text-xl font-normal">{user?.email}</p>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8 pb-8 border-b border-gray-200">
-            <div className="text-center">
-              <div className="text-2xl lg:text-4xl font-bold text-green-600 mb-1">
-                {statsLoading ? '...' : (stats.points || 0)}
+<div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8 pb-8 border-b border-gray-200">
+              <div className="text-center">
+                <div className="text-2xl lg:text-4xl font-bold text-green-600 mb-1">
+                  {statsLoading ? '...' : (stats.points || 0)}
+                </div>
+                <div className="text-sm lg:text-lg font-normal text-gray-600">Total Points</div>
               </div>
-              <div className="text-sm lg:text-lg font-regular text-gray-600">Total Points</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl lg:text-4xl font-bold text-green-600 mb-1">
-                {statsLoading ? '...' : (stats.total_co2_saved?.toFixed(1) || '0.0')}
+              <div className="text-center">
+                <div className="text-2xl lg:text-4xl font-bold text-green-600 mb-1">
+                  {statsLoading ? '...' : (stats.total_co2_saved?.toFixed(1) || '0.0')}
+                </div>
+                <div className="text-sm lg:text-lg font-normal text-gray-600">kg CO₂ Saved</div>
               </div>
-              <div className="text-sm lg:text-lg font-regular text-gray-600">kg CO₂ Saved</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl lg:text-4xl font-bold text-green-600 mb-1">
+              <div className="text-center">
+                <div className="text-2xl lg:text-4xl font-bold text-green-600 mb-1">
                   {statsLoading ? '...' : (stats.total_waste_recycled?.toFixed(1) || '0.0')}
                 </div>
-                <div className="text-[20px] font-regular text-black-600">kg Recycled</div>
+                <div className="text-sm lg:text-lg font-normal text-gray-600">kg Recycled</div>
               </div>
             </div>
 
@@ -126,7 +125,7 @@ function ProfileContent() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
-                    className="w-full pl-10 pr-4 py-2.5 text-base font-regular border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
+                    className="w-full pl-10 pr-4 py-2.5 text-base font-normal border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
                     placeholder="Lauren"
                   />
                 </div>
@@ -142,7 +141,7 @@ function ProfileContent() {
                     type="text"
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2.5 text-[16px] font-regular border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
+                    className="w-full pl-10 pr-4 py-2.5 text-base font-normal border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
                     placeholder="City, Country"
                   />
                 </div>
@@ -160,7 +159,6 @@ function ProfileContent() {
           </div>
         </div>
       </div>
-    </div>
   );
 }
 
